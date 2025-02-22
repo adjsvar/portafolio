@@ -2,9 +2,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import projectsData from '../data/projects.json';
-import TestCases from '../components/TestCases';
-import BugReport from '../components/BugReport'; // Este componente internamente alterna entre BugReportRow y BugReportColumn
-import ApiTests from '../components/ApiTests';     // Este componente internamente alterna entre ApiTestsRow y ApiTestsColumn
+import TestTables from '../components/TestTables'; // Componente unificado para tests
 import '../styles/ProjectDetail.css';
 
 function ProjectDetail(props) {
@@ -12,10 +10,10 @@ function ProjectDetail(props) {
   let project = null;
 
   if (summary) {
-    // Modo resumen: los datos vienen directamente de las props
+    // Modo resumen: los datos vienen de las props directamente
     project = props;
   } else {
-    // Modo detalle: usamos el id de la URL para buscar el proyecto
+    // Modo detalle: obtenemos el id desde la URL y buscamos en el JSON
     const { id } = useParams();
     project = projectsData.find((p) => p.id.toString() === id);
   }
@@ -50,49 +48,28 @@ function ProjectDetail(props) {
       {/* Casos de Prueba */}
       {project.testCases && project.testCases.length > 0 && (
         <div className="test-cases">
-          <h3>Casos de Prueba</h3>
-          <TestCases testCases={project.testCases} layout="row" />
+          <TestTables tests={project.testCases} testType="testCases" />
         </div>
       )}
 
       {/* Bug Reports */}
       {project.bugReports && project.bugReports.length > 0 && (
         <div className="bug-reports">
-          <h3>Bug Reports</h3>
-          <BugReport bugReports={project.bugReports} />
+          <TestTables tests={project.bugReports} testType="bugReports" />
         </div>
       )}
 
       {/* Pruebas API */}
       {project.apiTests && project.apiTests.length > 0 && (
         <div className="api-tests">
-          <h3>Pruebas API</h3>
-          <ApiTests apiTests={project.apiTests} />
+          <TestTables tests={project.apiTests} testType="apiTests" />
         </div>
       )}
 
       {/* Pruebas de Rendimiento */}
       {project.performanceTests && project.performanceTests.length > 0 && (
         <div className="performance-tests">
-          <h3>Pruebas de Rendimiento</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Métrica</th>
-                <th>Valor</th>
-                <th>Threshold</th>
-              </tr>
-            </thead>
-            <tbody>
-              {project.performanceTests.map((perf) => (
-                <tr key={perf.id}>
-                  <td>{perf.metric}</td>
-                  <td>{perf.value}</td>
-                  <td>{perf.threshold}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TestTables tests={project.performanceTests} testType="performanceTests" />
         </div>
       )}
 
