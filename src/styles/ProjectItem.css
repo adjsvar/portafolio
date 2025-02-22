@@ -1,0 +1,63 @@
+/* src/styles/ProjectItem.css */
+
+/* Contenedor principal del proyecto item usando Flex */
+.projectitem-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Contenedor para la imagen */
+.projectitem-img {
+  flex: 1;
+}
+
+/* La imagen ocupa el 100% del contenedor de imagen */
+.projectitem-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Contenedor para la descripción */
+.projectitem-desc {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estilos para el título */
+.projectitem-desc h3 {
+  font-size: 1.75rem;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para el párrafo descriptivo */
+.projectitem-desc p {
+  font-size: 1rem;
+  color: #293445;
+  line-height: 1.6;
+}
+
+/* =================================
+   BREAKPOINT: 850px - Modo móvil: layout en columna
+================================= */
+@media screen and (max-width: 850px) {
+  .projectitem-item {
+    flex-direction: column;
+  }
+  
+  .projectitem-img,
+  .projectitem-desc {
+    width: 100%;
+  }
+  
+  .projectitem-desc {
+    padding: 1rem 0;
+  }
+}

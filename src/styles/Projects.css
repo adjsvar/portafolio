@@ -1,0 +1,38 @@
+/* src/styles/Projects.css */
+
+/* Sección de Proyectos */
+.projects {
+  width: 100%;
+  background-color: #f9fafb; /* Fondo claro */
+}
+
+.projects h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Contenedor que agrupa todos los proyectos */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+/* Ajustes para móviles */
+@media screen and (max-width: 850px) {
+  .projects {
+    padding: 1rem 5vw;
+  }
+  
+  .projects h2 {
+    font-size: 2.5rem;
+  }
+  
+  .projects-container {
+    padding: 1rem 5vw;
+  }
+}

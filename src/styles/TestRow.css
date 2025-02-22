@@ -1,0 +1,52 @@
+/* src/styles/TestRow.css */
+
+.testrow-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilo común para todas las celdas */
+  .cell {
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Celda de caption: abarca todas las columnas y tiene estilos destacados */
+  .caption {
+    grid-column: 1 / -1;
+    background-color: #d1d5db;
+    color: #3b82f6;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    border: none;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Celda de encabezado (header) */
+  .header-cell {
+    background-color: #e2e8f0;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #3b82f6;
+  }
+  
+  /* Remover el borde derecho de la última columna de cada fila */
+  .testrow-grid > :nth-child(10n) {
+    border-right: none;
+  }
+  
+  /* Remover el borde inferior de la última fila (últimos 10 elementos) */
+  .testrow-grid > :nth-last-child(-n+10) {
+    border-bottom: none;
+  }
+  

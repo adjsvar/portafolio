@@ -1,0 +1,149 @@
+/* src/styles/TestColumn.css */
+
+.testcolumn-container {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  /* Wrapper: organiza 3 filas: título, navegación y grid de detalle */
+  .testcolumn-grid-wrapper {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  /* Fila de título superior: se ha incrementado el tamaño, se usa fondo más oscuro y mayúsculas */
+  .testcolumn-title {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    background-color: #d1d5db; /* fondo más oscuro */
+    padding: 0.75rem 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #3b82f6;
+    border-bottom: 2px solid #ccc;
+    transition: font-size 0.3s ease;
+  }
+  
+  /* Fila de navegación: 3 columnas */
+  .testcolumn-nav {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .nav-header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #3b82f6;
+    transition: font-size 0.3s ease;
+  }
+  
+  .nav-arrow {
+    background: #3b82f6;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, font-size 0.3s ease;
+    justify-self: center;
+  }
+  
+  .nav-arrow:hover {
+    background: #60a5fa;
+  }
+  
+  /* Grid para los detalles: 2 columnas, 25% para header y 75% para valor */
+  .testcolumn-grid {
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    width: 100%;
+    gap: 0;
+    border-collapse: collapse;
+  }
+  
+  /* Cada celda: con borde en todos los lados (sin margin negativo) */
+  .grid-cell {
+    padding: 0.75rem;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+  }
+  
+  /* Celda de etiqueta (header): fondo sombreado */
+  .grid-label {
+    background-color: #e2e8f0;
+    font-weight: bold;
+    color: #3b82f6;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Celda de valor */
+  .grid-value {
+    color: #293445;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  /* Estilos condicionales para el campo Status */
+  .status-pass {
+    background-color: #28a745 !important;
+    color: #fff !important;
+  }
+  
+  .status-fail {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+  }
+  
+  .status-warning {
+    background-color: #fd7e14 !important;
+    color: #fff !important;
+  }
+  
+  /* Breakpoint para pantallas menores a 650px: mantener tamaños de fuente base */
+  @media screen and (max-width: 650px) {
+    .testcolumn-grid {
+        grid-template-columns: 35% 65%;
+      }
+    .testcolumn-title,
+    .nav-header,
+    .nav-arrow,
+    .grid-cell {
+      padding: 0.65rem;
+    }
+  }
+  
+  /* Breakpoint para pantallas menores a 480px: 
+     se ajusta el grid a 35%/65% y se permite que el texto haga saltos de línea */
+  @media screen and (max-width: 480px) {
+    .testcolumn-grid {
+      grid-template-columns: 35% 65%;
+    }
+    .grid-cell {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      word-wrap: break-word;
+    }
+    .nav-header, .nav-arrow {
+      padding: 0.5rem 0.8rem;
+    }
+  }
+  

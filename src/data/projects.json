@@ -1,0 +1,159 @@
+[
+  {
+    "id": 1,
+    "title": "Proyecto Alpha",
+    "briefDescription": "Aplicación web para la gestión de tareas y seguimiento de subtareas.",
+    "testCases": [
+      {
+        "id": 101,
+        "title": "Inicio de sesión",
+        "description": "Verificar que el usuario pueda iniciar sesión con credenciales válidas.",
+        "preconditions": "El usuario debe estar registrado.",
+        "steps": "Ingresar correo y contraseña, hacer clic en 'Iniciar sesión'.",
+        "expectedResult": "Acceso exitoso al dashboard.",
+        "actualResult": "Acceso exitoso.",
+        "status": "Pass",
+        "severity": "Media",
+        "priority": "Alta"
+      },
+      {
+        "id": 102,
+        "title": "Creación de tarea",
+        "description": "Probar la creación de una nueva tarea.",
+        "preconditions": "El usuario debe estar logueado.",
+        "steps": "Ir a la sección de tareas, llenar el formulario y enviar.",
+        "expectedResult": "Tarea creada y listada en el sistema.",
+        "actualResult": "Error al crear tarea.",
+        "status": "Fail",
+        "severity": "Alta",
+        "priority": "Alta"
+      }
+    ],
+    "bugReports": [
+      {
+        "id": 201,
+        "titulo": "Error en validación de formularios",
+        "descripcion": "El formulario no valida los campos obligatorios de forma correcta, lo que permite enviar datos incompletos.",
+        "pasos": "1. Llenar parcialmente el formulario.\n2. Enviar el formulario.",
+        "resultadoEsperado": "El sistema debería impedir el envío y mostrar un mensaje de error.",
+        "resultadoActual": "El formulario se envía sin mostrar error.",
+        "entorno": "Chrome 110 en Windows 10, versión 1.0 de la aplicación",
+        "severidadPrioridad": "Alta / Alta",
+        "adjuntos": "Captura de pantalla adjunta"
+      },
+      {
+        "id": 205,
+        "titulo": "Subtareas no se guardan",
+        "descripcion": "Al agregar múltiples subtareas, algunas no se guardan en la base de datos.",
+        "pasos": "1. Crear una tarea nueva.\n2. Agregar tres subtareas.\n3. Guardar la tarea y revisar en la lista.",
+        "resultadoEsperado": "Todas las subtareas se deben guardar y mostrar.",
+        "resultadoActual": "Solo se guardan dos de las tres subtareas.",
+        "entorno": "Firefox 100 en macOS, versión 1.0",
+        "severidadPrioridad": "Media / Media",
+        "adjuntos": "Log del servidor adjunto"
+      }
+    ],
+    "apiTests": [
+      {
+        "id": 301,
+        "endpoint": "GET /tasks",
+        "method": "GET",
+        "description": "Verificar que se obtenga la lista de tareas correctamente.",
+        "datosEntrada": "Ninguno",
+        "resultadoEsperado": "Código 200 y arreglo de tareas.",
+        "resultadoReal": "Código 200 y arreglo de tareas.",
+        "estado": "Pass",
+        "comentarios": ""
+      },
+      {
+        "id": 302,
+        "endpoint": "POST /tasks",
+        "method": "POST",
+        "description": "Verificar que se cree una tarea correctamente.",
+        "datosEntrada": "{\"title\": \"Nueva tarea\", \"description\": \"Descripción de la tarea\"}",
+        "resultadoEsperado": "Código 201 y objeto de tarea creada.",
+        "resultadoReal": "Código 400, error de validación.",
+        "estado": "Fail",
+        "comentarios": "Falla al validar campos obligatorios."
+      }
+    ],
+    "performanceTests": [
+      {
+        "id": 401,
+        "metric": "Carga de página (Home)",
+        "value": "1.5s",
+        "threshold": "2s"
+      },
+      {
+        "id": 405,
+        "metric": "Carga de página (Tasks)",
+        "value": "2s",
+        "threshold": "2.5s"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Proyecto Beta",
+    "briefDescription": "Plataforma e-commerce con carrito de compras y sistema de pagos integrado.",
+    "testCases": [
+      {
+        "id": 103,
+        "title": "Flujo de compra",
+        "description": "Verificar el proceso completo de compra desde la selección hasta el pago.",
+        "preconditions": "El usuario debe tener productos en el carrito.",
+        "steps": "Seleccionar productos, proceder al checkout, ingresar detalles de pago y confirmar.",
+        "expectedResult": "Compra completada con éxito.",
+        "actualResult": "Compra exitosa.",
+        "status": "Pass",
+        "severity": "Media",
+        "priority": "Alta"
+      }
+    ],
+    "bugReports": [
+      {
+        "id": 202,
+        "titulo": "Actualización incorrecta del stock",
+        "descripcion": "El stock no se actualiza correctamente después de realizar una compra.",
+        "pasos": "1. Realizar una compra.\n2. Verificar el stock del producto.",
+        "resultadoEsperado": "El stock se reduce de forma acorde al producto comprado.",
+        "resultadoActual": "El stock se mantiene sin cambios o se reduce incorrectamente.",
+        "entorno": "Chrome 110 en Windows 10, versión 1.2",
+        "severidadPrioridad": "Alta / Alta",
+        "adjuntos": "Captura y log del error"
+      }
+    ],
+    "apiTests": [
+      {
+        "id": 306,
+        "endpoint": "GET /products",
+        "method": "GET",
+        "description": "Verificar que se obtenga la lista de productos.",
+        "datosEntrada": "Ninguno",
+        "resultadoEsperado": "Código 200 y lista de productos.",
+        "resultadoReal": "Código 200 y lista de productos.",
+        "estado": "Pass",
+        "comentarios": ""
+      },
+      {
+        "id": 307,
+        "endpoint": "POST /checkout",
+        "method": "POST",
+        "description": "Verificar el proceso de checkout.",
+        "datosEntrada": "{\"user_id\": 123, \"cart\": [{\"productId\": 456, \"quantity\": 2}]}",
+        "resultadoEsperado": "Código 200 y confirmación de compra.",
+        "resultadoReal": "Código 200 y confirmación de compra.",
+        "estado": "Pass",
+        "comentarios": ""
+      }
+    ],
+    "performanceTests": [
+      {
+        "id": 402,
+        "metric": "Tiempo de respuesta (Checkout)",
+        "value": "1.2s",
+        "threshold": "1.5s"
+      }
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+/* src/styles/App.css */
+
+/* Importar la fuente Source Sans Pro */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+textarea {
+  border: none;
+  background: none;
+  font: inherit;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Configuración global de tipografías y fondo */
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #293445;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  padding: 80px 0 0 0;
+}
+
+/* Estilos generales para el contenido */
+.content {
+  width: 100%;
+  min-height: calc(100dvh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 10vw;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #3b82f6;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3b82f6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+@media (max-width: 850px) {
+  main {
+    padding: 144px 0 0 0;
+  }
+
+  .content {
+    min-height: calc(100dvh - 144px);
+  }
+}

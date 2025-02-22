@@ -1,0 +1,101 @@
+/* src/styles/About.css */
+
+/* Contenedor principal de la sección About */
+.about {
+    /* Centra el contenedor extra (about-wrapper) en la sección */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9fafb;
+  }
+  
+  /* Contenedor adicional para agrupar y alinear los dos bloques */
+  .about-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start; /* Alinea por el borde superior */
+    width: 100%;
+    max-width: 1200px; /* Opcional, para limitar el ancho */
+  }
+  
+  /* Bloque de información personal */
+  .about-info {
+    flex: 1;
+    text-align: left;
+  }
+  
+  /* Estilos para los botones */
+  .about-buttons {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .btn:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Bloque de Skills */
+  .skills {
+    flex: 1;
+    text-align: center;
+  }
+  
+ 
+  .skills-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .skill-badge {
+    padding: 0.5rem 1rem;
+    background-color: #e0e7ff;
+    color: #1e293b;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: default;
+    transition: background-color 0.3s ease;
+  }
+  
+  .skill-badge:hover {
+    background-color: #c7d2fe;
+  }
+  
+  /* =================================
+     BREAKPOINT: 768px - Modo móvil: apilar en columna
+  ================================= */
+  @media screen and (max-width: 850px) {
+    .about-wrapper {
+      flex-direction: column;
+    }
+    
+    .about-info p {
+      font-size: 1.2rem;
+    }    
+    
+    
+    .skill-badge {
+      font-size: 0.9rem;
+    }
+  }
+  

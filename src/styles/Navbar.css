@@ -1,0 +1,174 @@
+/* src/styles/Navbar.css */
+
+/* Variables para facilitar cambios */
+:root {
+  --bg-color: #0e1013;
+  --white: #ffffff;
+  --primary-color: #3b82f6;
+  --active-color: #60a5fa;
+}
+
+/* =================================
+   NAVBAR BASE STYLES
+================================= */
+.navbar {
+  width: 100%;
+  background-color: var(--bg-color);
+  padding: 0 5vw;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-texto {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--white);
+  font-size: 2rem;
+  transition: color 0.3s ease, font-size 0.3s ease;
+  margin: 0;
+}
+
+.logo-texto:hover {
+  color: var(--primary-color);
+}
+
+.logo-img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+/* Active link: por defecto oculto en escritorio */
+.active-link {
+  display: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--active-color);
+}
+
+/* Ícono hamburguesa: oculto en escritorio */
+.hamburguer {
+  display: none;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+/* Enlaces de navegación en escritorio */
+.navlinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navlinks li a {
+  color: var(--white);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 2rem;
+  transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+.navlinks li a:focus {
+  outline: none;
+}
+
+.navlinks li a:hover {
+  color: var(--primary-color);
+}
+
+.navlinks li a.active {
+  color: var(--active-color);
+}
+
+/* =================================
+   BREAKPOINT: 1050px - Ajusta tamaño de fuente
+================================= */
+@media (max-width: 1050px) {
+  .logo-texto {
+    font-size: 1.6rem;
+  }
+  .navlinks li a {
+    font-size: 1.6rem;
+  }
+}
+
+/* =================================
+   BREAKPOINT: 850px - Modo móvil
+================================= */
+@media (max-width: 850px) {
+  .hamburguer {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .logo-texto {
+    display: none;
+  }
+
+  .navlinks {
+    position: absolute;
+    top: calc(80px + 64px);
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .navlinks.open {
+    display: flex;
+  }
+
+  .navlinks li a {
+    font-size: 1.6rem;
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .navlinks li a:hover {
+    background-color: var(--primary-color);
+  }
+
+  /* Mostrar el active link centrado en móvil */
+  .active-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--active-color);
+    font-size: 1.5rem;
+    transition: font-size 0.3s ease;
+  }
+}
+
+/* Adicional: Si deseas que se aplique también en resoluciones hasta 800px */
+@media screen and (max-width: 800px) {
+  .active-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,42 @@
+/* =================================
+   VARIABLES GLOBALES PARA FOOTER
+================================= */
+:root {
+    --footer-bg: #0e1013;
+    --footer-color: #ffffff;
+    --footer-padding: 1.5rem;
+    --footer-font-size: 1.2rem;
+  }
+  
+  /* =================================
+     FOOTER ESTILOS
+  ================================= */
+  .footer {
+    width: 100%;
+    background-color: var(--footer-bg);
+    color: var(--footer-color);
+    padding: var(--footer-padding);
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer p {
+    font-size: var(--footer-font-size);
+    font-weight: 300;
+  }
+  
+  /* =================================
+     BREAKPOINTS (si se requieren ajustes en móviles)
+  ================================= */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 1rem;
+    }
+    .footer p {
+      font-size: 1rem;
+    }
+  }
+  
