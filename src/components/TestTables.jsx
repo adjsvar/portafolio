@@ -43,12 +43,14 @@ function TestTables({ tests, testType, layout }) {
     captionText = 'API TESTS';
   } else if (testType === 'performanceTests') {
     captionText = 'PERFORMANCE TESTS';
+  } else if (testType === 'bugReports') {
+    captionText = 'BUG REPORTS';
   } else {
     captionText = 'TESTS';
   }
 
   if (computedLayout === 'row') {
-    // Layout "row": tabla completa con encabezado, incluyendo el título en una fila estilo header.
+    // Layout "row": tabla completa con encabezado (título en una fila estilo header)
     return (
       <div className="testtables-row-container">
         <table className="test-table">
@@ -79,28 +81,31 @@ function TestTables({ tests, testType, layout }) {
   } else {
     // Layout "column": se muestra una prueba a la vez con navegación.
     const currentTest = tests[currentIndex];
-
-    const handlePrev = () => {
-      setCurrentIndex((prev) => (prev > 0 ? prev - 1 : tests.length - 1));
-    };
-
-    const handleNext = () => {
-      setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0));
-    };
+    const singleItem = tests.length === 1;
 
     return (
       <div className="testtables-column-container">
-        <div className="testtables-column-nav">
-          <button onClick={handlePrev} className="nav-arrow">
-            &#8592;
-          </button>
+        <div className={`testtables-column-nav ${singleItem ? 'single-item' : ''}`}>
+          {!singleItem && (
+            <button
+              onClick={() =>
+                setCurrentIndex((prev) => (prev > 0 ? prev - 1 : tests.length - 1))
+              }
+              className="nav-arrow left"
+            ></button>
+          )}
           <div className="nav-headers">
             <div className="nav-caption">{captionText}</div>
             <div className="nav-id">{renderCell(currentTest.id)}</div>
           </div>
-          <button onClick={handleNext} className="nav-arrow">
-            &#8594;
-          </button>
+          {!singleItem && (
+            <button
+              onClick={() =>
+                setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0))
+              }
+              className="nav-arrow right"
+            ></button>
+          )}
         </div>
         <div className="testtables-column-grid">
           {allKeys.map((key) => (
