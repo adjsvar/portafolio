@@ -1,7 +1,6 @@
-// src/components/Navbar.jsx
 import React, { useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ProjectsContext } from '../context/ProjectsContext'; // Importamos el contexto
+import { ProjectsContext } from '../context/ProjectsContext';
 import logo from '../assets/foto.jpg';
 import hamOpen from '../assets/hamopen.svg';
 import hamClose from '../assets/hamclose.svg';
@@ -10,7 +9,7 @@ import '../styles/Navbar.css';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { projects } = useContext(ProjectsContext); // Obtenemos proyectos desde el contexto
+  const { projects } = useContext(ProjectsContext);
 
   const routeNames = {
     '/': 'Home',
@@ -20,14 +19,21 @@ function Navbar() {
   };
 
   let activeTextContent = routeNames[location.pathname] || '';
+  let isProjectDetail = false;
 
   // Si la ruta es de detalle de proyecto, se muestra el active link personalizado
   if (location.pathname.startsWith('/projectdetail')) {
+    isProjectDetail = true;
     const parts = location.pathname.split('/');
     const projectId = parts[2];
     const project = projects.find((p) => p.id.toString() === projectId);
     if (project) {
-      activeTextContent = `/${project.titulo}`;
+      activeTextContent = (
+        <span className="project-detail-title">
+          <span className="projects-small">Projects / </span>
+          <span className="project-name">{project.titulo}</span>
+        </span>
+      );
     }
   }
 
@@ -47,7 +53,9 @@ function Navbar() {
       </NavLink>
 
       {/* Active link en modo móvil */}
-      <div className="active-link" id="active-link">{activeTextContent}</div>
+      <div className={`active-link ${isProjectDetail ? 'is-project-detail' : ''}`} id="active-link">
+        {activeTextContent}
+      </div>
 
       <img
         src={isOpen ? hamClose : hamOpen}

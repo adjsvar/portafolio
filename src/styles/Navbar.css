@@ -60,6 +60,33 @@
   color: var(--active-color);
 }
 
+/* Project detail styles */
+.project-detail-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.projects-small {
+  font-size: 0.7em;
+  opacity: 0.8;
+  font-weight: bold;
+  margin-right: 4px;
+  text-transform: uppercase;
+}
+
+.project-name {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.active-link.is-project-detail {
+  text-align: center;
+}
+
 /* Ícono hamburguesa: oculto en escritorio */
 .hamburguer {
   display: none;
@@ -170,5 +197,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* Breakpoint para dispositivos más pequeños - Layout vertical para project detail */
+@media screen and (max-width: 600px) {
+  .project-detail-title {
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .projects-small {
+    margin-right: 0;
+  }
+  
+  .active-link.is-project-detail {
+    width: 100%;
+    line-height: 1.2;
   }
 }

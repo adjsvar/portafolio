@@ -1,7 +1,7 @@
 // src/components/TestTables.jsx
-import React, { useState, useEffect } from 'react';
-import EvidenceViewer from './EvidenceViewer';  // El componente "all in one" con overlay, zoom, pan
-import '../styles/TestTables.css';
+import React, { useState, useEffect } from "react";
+import EvidenceViewer from "./EvidenceViewer";
+import "../styles/TestTables.css";
 
 function TestTables({ tests, testType, layout }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -10,71 +10,73 @@ function TestTables({ tests, testType, layout }) {
   // Estado para mostrar/hide EvidenceViewer
   const [modalOpen, setModalOpen] = useState(false);
   // Almacena la "imagen" (string) que se mostrará en EvidenceViewer
-  const [modalImage, setModalImage] = useState('');
+  const [modalImage, setModalImage] = useState("");
 
   useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
     }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Determinar layout
-  const computedLayout = layout || (windowWidth >= 1150 ? 'row' : 'column');
+  const computedLayout = layout || (windowWidth >= 1150 ? "row" : "column");
 
   if (!tests || tests.length === 0) {
     return <div>No hay pruebas disponibles.</div>;
   }
 
   // Recolecta todas las claves
-  const allKeys = [...new Set(tests.flatMap(item => Object.keys(item)))];
+  const allKeys = [...new Set(tests.flatMap((item) => Object.keys(item)))];
 
   // Determina título (caption)
   const captionText = testType
     ? testType.toUpperCase()
     : tests[0].tipo
     ? tests[0].tipo.toUpperCase()
-    : 'TESTS';
+    : "TESTS";
 
   // --- Lógica para abrir/cerrar EvidenceViewer ---
   const handleOpenModal = (imgSrc) => {
-    setModalImage(imgSrc || '');
+    setModalImage(imgSrc || "");
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    setModalImage('');
+    setModalImage("");
   };
 
   // Render de celdas
   const renderCell = (value, key) => {
-    if (key === 'evidencia') {
-      if (!value || typeof value !== 'object') return '-';
-      // Suponemos: item.evidencia = { imagen: "URL", video: ... } 
+    if (key === "evidencia") {
+      if (!value || typeof value !== "object") return "-";
+      // Suponemos: item.evidencia = { imagen: "URL", video: ... }
       if (value.imagen) {
         // Al hacer clic => abrimos EvidenceViewer
         return (
-          <span className="evidence-link" onClick={() => handleOpenModal(value.imagen)}>
+          <span
+            className="evidence-link"
+            onClick={() => handleOpenModal(value.imagen)}
+          >
             Ver Evidencia
           </span>
         );
       }
-      return '-';
+      return "-";
     }
     // Si es un objeto distinto a evidencia (por ejemplo un subobjeto)
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       return JSON.stringify(value);
     }
-    return value === undefined || value === null || value === '' ? '-' : value;
+    return value === undefined || value === null || value === "" ? "-" : value;
   };
 
   // ==================== LAYOUT ROW ====================
-  if (computedLayout === 'row') {
+  if (computedLayout === "row") {
     return (
       <div className="testtables-row-container">
-
         {/* Renderizamos EvidenceViewer si modalOpen está en true */}
         {modalOpen && (
           <EvidenceViewer
@@ -92,7 +94,7 @@ function TestTables({ tests, testType, layout }) {
               </th>
             </tr>
             <tr>
-              {allKeys.map(key => (
+              {allKeys.map((key) => (
                 <th key={key}>{key}</th>
               ))}
             </tr>
@@ -117,15 +119,14 @@ function TestTables({ tests, testType, layout }) {
     const singleItem = tests.length === 1;
 
     const handlePrev = () => {
-      setCurrentIndex(prev => (prev > 0 ? prev - 1 : tests.length - 1));
+      setCurrentIndex((prev) => (prev > 0 ? prev - 1 : tests.length - 1));
     };
     const handleNext = () => {
-      setCurrentIndex(prev => (prev < tests.length - 1 ? prev + 1 : 0));
+      setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0));
     };
 
     return (
       <div className="testtables-column-container">
-
         {modalOpen && (
           <EvidenceViewer
             src={modalImage}
@@ -134,34 +135,36 @@ function TestTables({ tests, testType, layout }) {
           />
         )}
 
-        <div className={`testtables-column-nav ${singleItem ? 'single-item' : ''}`}>
-          {!singleItem && (
-            <button onClick={handlePrev} className="nav-arrow left">
-              &larr;
-            </button>
-          )}
-          <div className="nav-info">
-            <h3 className="nav-title">{currentItem.titulo || '-'}</h3>
-            {currentItem.descripcion && (
-              <p className="nav-description">{currentItem.descripcion}</p>
+        <div
+          className={`testtables-column-nav ${singleItem ? "single-item" : ""}`}
+        >
+          <div className="nav-arrows-container">
+            {!singleItem && (
+              <>
+                <button onClick={handlePrev} className="nav-arrow left">                  
+                </button>
+
+                <div className="nav-title">
+                  {currentItem.ID || "-"}
+                </div>
+                <button onClick={handleNext} className="nav-arrow right">                  
+                </button>
+              </>
             )}
           </div>
-          {!singleItem && (
-            <button onClick={handleNext} className="nav-arrow right">
-              &rarr;
-            </button>
-          )}
         </div>
 
         <div className="testtables-column-grid">
-          {allKeys.map((key) => (
-            <div key={key} className="testtables-column-row">
-              <div className="grid-label">{key}:</div>
-              <div className="grid-value">
-                {renderCell(currentItem[key], key)}
+          {allKeys
+            .filter((key) => key !== "ID")
+            .map((key) => (
+              <div key={key} className="testtables-column-row">
+                <div className="grid-label">{key}:</div>
+                <div className="grid-value">
+                  {renderCell(currentItem[key], key)}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     );
