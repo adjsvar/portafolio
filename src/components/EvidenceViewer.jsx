@@ -4,9 +4,6 @@ import '../styles/EvidenceViewer.css';
 function EvidenceViewer({ src, alt, onClose }) {
   const [loaded, setLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [zoom, setZoom] = useState(false);
-  const [transformOrigin, setTransformOrigin] = useState('50% 50%');
-
   const overlayRef = useRef(null);
   const imgRef = useRef(null);
 
@@ -38,33 +35,6 @@ function EvidenceViewer({ src, alt, onClose }) {
     }
   };
 
-  // Al hacer clic en la imagen:
-  // 1) Si estaba con zoom, la regresa a tamaño normal.
-  // 2) Si no tenía zoom, primero ajusta el transform-origin,
-  //    luego hace zoom en un setTimeout para evitar saltos.
-  const handleImageClick = (e) => {
-    if (zoom) {
-      // Regresar a estado normal
-      setZoom(false);
-      setTransformOrigin('50% 50%');
-    } else {
-      // Calcular transform-origin según el punto de clic
-      const rect = imgRef.current?.getBoundingClientRect();
-      if (rect) {
-        const xLocal = e.clientX - rect.left;
-        const yLocal = e.clientY - rect.top;
-        const xPercent = (xLocal / rect.width) * 100;
-        const yPercent = (yLocal / rect.height) * 100;
-        setTransformOrigin(`${xPercent}% ${yPercent}%`);
-      }
-
-      // Esperar un "tick" para que el DOM aplique el transform-origin...
-      setTimeout(() => {
-        setZoom(true);
-      }, 0);
-    }
-  };
-
   if (hasError) {
     return (
       <div className="ev-overlay" ref={overlayRef} onClick={handleOverlayClick}>
@@ -92,12 +62,7 @@ function EvidenceViewer({ src, alt, onClose }) {
         ref={imgRef}
         src={src}
         alt={alt || 'Evidencia'}
-        // Aplicamos una clase para cuando haya zoom
-        className={`ev-image ${zoom ? 'ev-zoom' : ''}`}
-        // Sólo el transform-origin se deja en style inline
-        // para que cambie dinámicamente sin sobreescribirlo en CSS.
-        style={{ transformOrigin }}
-        onClick={handleImageClick}
+        className="ev-image"
       />
     </div>
   );
