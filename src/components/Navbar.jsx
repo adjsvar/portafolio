@@ -1,42 +1,41 @@
 // src/components/Navbar.jsx
-import React, { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import projectsData from '../data/projects.json'
-import logo from '../assets/foto.jpg'
-import hamOpen from '../assets/hamopen.svg'
-import hamClose from '../assets/hamclose.svg'
-import '../styles/Navbar.css'
+import React, { useState, useContext } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { ProjectsContext } from '../context/ProjectsContext'; // Importamos el contexto
+import logo from '../assets/foto.jpg';
+import hamOpen from '../assets/hamopen.svg';
+import hamClose from '../assets/hamclose.svg';
+import '../styles/Navbar.css';
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const { projects } = useContext(ProjectsContext); // Obtenemos proyectos desde el contexto
 
   const routeNames = {
     '/': 'Home',
     '/about': 'About Me',
     '/projects': 'Projects',
     '/contact': 'Contact'
-  }
+  };
 
-  let activeTextContent = routeNames[location.pathname] || ''
+  let activeTextContent = routeNames[location.pathname] || '';
 
   // Si la ruta es de detalle de proyecto, se muestra el active link personalizado
   if (location.pathname.startsWith('/projectdetail')) {
     const parts = location.pathname.split('/');
     const projectId = parts[2];
-    const project = projectsData.find(p => p.id.toString() === projectId);
+    const project = projects.find((p) => p.id.toString() === projectId);
     if (project) {
-      activeTextContent = `/${project.title}`;
+      activeTextContent = `/${project.titulo}`;
     }
   }
-  
-  
 
   const handleToggle = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
-  const closeMenu = () => setIsOpen(false)
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <section className="navbar">
@@ -97,7 +96,7 @@ function Navbar() {
         </li>
       </ul>
     </section>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

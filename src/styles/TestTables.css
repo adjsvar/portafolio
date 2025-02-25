@@ -1,177 +1,142 @@
 /* src/styles/TestTables.css */
 
-/* ===============================
-   Estilos para Layout "Row" (tabla completa)
-=============================== */
+/* Layout row */
 .testtables-row-container {
-  width: 100%;
   overflow-x: auto;
-  margin: 1rem 0;
-  padding: 0; /* Sin padding horizontal */
+  margin-top: 1rem;
 }
-      
-.table-caption-cell {
-  background-color: #f0f4f8; /* Fondo similar a los headers */
-  color: #3b82f6;           /* Texto azul */
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 0.75rem;
-  text-align: center;
-  border-bottom: 2px solid #ccc;
-}
-  
+
+/* Tabla */
 .test-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: sans-serif;
+  font-size: 0.95rem;
 }
-  
-.test-table th {
-  background-color: #f0f4f8;
-  color: #293445;
+
+.test-table th,
+.test-table td {
+  border: 1px solid #ccc;
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 2px solid #ccc;
 }
-  
-.test-table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #eee;
-  color: #293445;
+
+.test-table th {
+  background-color: #e2e8f0;
+  color: #3b82f6;
+  font-weight: bold;
 }
-  
-/* ===============================
-   Estilos para Layout "Column" (vista de un test a la vez)
-=============================== */
+
+.table-caption-row .table-caption-cell {
+  background-color: #f0f2f5;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Layout column */
 .testtables-column-container {
-  width: 100%;
-  margin: 1rem 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
+  margin-top: 1rem;
 }
-  
+
 .testtables-column-nav {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: #f0f4f8;
-  border-bottom: 1px solid #ccc;
+  background-color: #f0f2f5;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
 }
-  
-.testtables-column-nav.single-item {
-  justify-content: center;
-}
-  
-/* Dibujamos las flechas con CSS usando triángulos */
+
 .nav-arrow {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin: 0 10px;
-  vertical-align: middle;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.1s ease;
-  outline: none; /* Quitar el recuadro azul */
+  transition: background 0.3s ease;
 }
-  
-.nav-arrow:active {
-  transform: scale(1.2);
+
+.nav-arrow:hover {
+  background-color: #60a5fa;
 }
-  
-.nav-arrow.left {
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 15px solid #3b82f6;
-}
-  
-.nav-arrow.right {
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 15px solid #3b82f6;
-}
-  
-.nav-headers {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.nav-info {
+  flex-grow: 1;
   text-align: center;
 }
-  
-.nav-caption {
-  font-size: 1.4rem; /* Aumentado un poco */
-  color: #3b82f6;
-  font-weight: bold;
+
+.nav-title {
+  font-size: 1.4rem;
+  margin: 0;
 }
-  
-.nav-id {
-  font-size: 1.2rem; /* Aumentado un poco */
-  color: #293445;
+
+.nav-description {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #555;
 }
-  
+
 .testtables-column-grid {
-  padding: 1rem;
-}
-  
-.testtables-column-row {
   display: grid;
-  grid-template-columns: 40% 60%;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  grid-template-columns: 35% 65%;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
 }
-  
-.testtables-column-row:last-child {
-  border-bottom: none;
+
+.testtables-column-row {
+  display: contents;
 }
-  
+
+.grid-label,
+.grid-value {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+}
+
 .grid-label {
+  background-color: #e2e8f0;
   font-weight: bold;
   color: #3b82f6;
-  margin-right: 1rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 1.1rem;
 }
-  
 .grid-value {
-  text-align: left;
   color: #293445;
-  word-wrap: break-word;
-  font-size: 1.1rem;
 }
-  
-/* ===============================
-   Breakpoint para pantallas pequeñas (max-width: 850px)
-=============================== */
-@media screen and (max-width: 850px) {
-  .table-caption-cell {
-    font-size: 1.3rem;
-    padding: 0.6rem;
-  }
-    
-  .test-table th,
-  .test-table td {
-    padding: 0.6rem;
-    font-size: 0.95rem;
-  }
-    
-  .nav-caption {
-    font-size: 1.3rem;
-  }
-    
-  .nav-id {
-    font-size: 1.1rem;
-  }
-    
-  .grid-label,
-  .grid-value {
-    font-size: 1rem;
-  }
-    
-  .testtables-row-container {
-    padding: 0;
-  }
+
+/* Enlace para la evidencia */
+.evidence-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.evidence-link:hover {
+  color: #2563eb;
+}
+
+/* Overlay modal */
+.evidence-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.evidence-modal {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
 }

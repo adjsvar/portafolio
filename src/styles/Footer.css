@@ -4,7 +4,7 @@
 :root {
     --footer-bg: #0e1013;
     --footer-color: #ffffff;
-    --footer-padding: 1.5rem;
+    --footer-padding: 3rem;
     --footer-font-size: 1.2rem;
   }
   
@@ -33,7 +33,7 @@
   ================================= */
   @media (max-width: 768px) {
     .footer {
-      padding: 1rem;
+      padding: 3rem 1rem;
     }
     .footer p {
       font-size: 1rem;

@@ -1,58 +1,89 @@
 // src/components/TestTables.jsx
 import React, { useState, useEffect } from 'react';
+import EvidenceViewer from './EvidenceViewer';  // El componente "all in one" con overlay, zoom, pan
 import '../styles/TestTables.css';
 
 function TestTables({ tests, testType, layout }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Estado para mostrar/hide EvidenceViewer
+  const [modalOpen, setModalOpen] = useState(false);
+  // Almacena la "imagen" (string) que se mostrará en EvidenceViewer
+  const [modalImage, setModalImage] = useState('');
+
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Helper para renderizar el valor o un '-' si está vacío.
-  const renderCell = (value) =>
-    value === undefined || value === null || value === '' ? '-' : value;
-
-  // Determinar layout: por prop o según ancho de ventana.
+  // Determinar layout
   const computedLayout = layout || (windowWidth >= 1150 ? 'row' : 'column');
 
   if (!tests || tests.length === 0) {
     return <div>No hay pruebas disponibles.</div>;
   }
 
-  // Calcular la unión de todas las claves presentes en los tests.
-  const baseKeys = Object.keys(tests[0]);
-  const additionalKeys = tests.reduce((acc, test) => {
-    Object.keys(test).forEach((key) => {
-      if (!baseKeys.includes(key) && !acc.includes(key)) {
-        acc.push(key);
+  // Recolecta todas las claves
+  const allKeys = [...new Set(tests.flatMap(item => Object.keys(item)))];
+
+  // Determina título (caption)
+  const captionText = testType
+    ? testType.toUpperCase()
+    : tests[0].tipo
+    ? tests[0].tipo.toUpperCase()
+    : 'TESTS';
+
+  // --- Lógica para abrir/cerrar EvidenceViewer ---
+  const handleOpenModal = (imgSrc) => {
+    setModalImage(imgSrc || '');
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setModalImage('');
+  };
+
+  // Render de celdas
+  const renderCell = (value, key) => {
+    if (key === 'evidencia') {
+      if (!value || typeof value !== 'object') return '-';
+      // Suponemos: item.evidencia = { imagen: "URL", video: ... } 
+      if (value.imagen) {
+        // Al hacer clic => abrimos EvidenceViewer
+        return (
+          <span className="evidence-link" onClick={() => handleOpenModal(value.imagen)}>
+            Ver Evidencia
+          </span>
+        );
       }
-    });
-    return acc;
-  }, []);
-  const allKeys = [...baseKeys, ...additionalKeys];
+      return '-';
+    }
+    // Si es un objeto distinto a evidencia (por ejemplo un subobjeto)
+    if (typeof value === 'object' && value !== null) {
+      return JSON.stringify(value);
+    }
+    return value === undefined || value === null || value === '' ? '-' : value;
+  };
 
-  // Asignación de caption según el tipo de prueba.
-  let captionText = '';
-  if (testType === 'testCases') {
-    captionText = 'TEST CASES';
-  } else if (testType === 'apiTests') {
-    captionText = 'API TESTS';
-  } else if (testType === 'performanceTests') {
-    captionText = 'PERFORMANCE TESTS';
-  } else if (testType === 'bugReports') {
-    captionText = 'BUG REPORTS';
-  } else {
-    captionText = 'TESTS';
-  }
-
+  // ==================== LAYOUT ROW ====================
   if (computedLayout === 'row') {
-    // Layout "row": tabla completa con encabezado (título en una fila estilo header)
     return (
       <div className="testtables-row-container">
+
+        {/* Renderizamos EvidenceViewer si modalOpen está en true */}
+        {modalOpen && (
+          <EvidenceViewer
+            src={modalImage}
+            alt="Evidencia"
+            onClose={handleCloseModal}
+          />
+        )}
+
         <table className="test-table">
           <thead>
             <tr className="table-caption-row">
@@ -61,16 +92,16 @@ function TestTables({ tests, testType, layout }) {
               </th>
             </tr>
             <tr>
-              {allKeys.map((key) => (
+              {allKeys.map(key => (
                 <th key={key}>{key}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {tests.map((test, rowIndex) => (
+            {tests.map((item, rowIndex) => (
               <tr key={rowIndex}>
                 {allKeys.map((key) => (
-                  <td key={key}>{renderCell(test[key])}</td>
+                  <td key={key}>{renderCell(item[key], key)}</td>
                 ))}
               </tr>
             ))}
@@ -78,40 +109,57 @@ function TestTables({ tests, testType, layout }) {
         </table>
       </div>
     );
-  } else {
-    // Layout "column": se muestra una prueba a la vez con navegación.
-    const currentTest = tests[currentIndex];
+  }
+
+  // ==================== LAYOUT COLUMN ====================
+  else {
+    const currentItem = tests[currentIndex];
     const singleItem = tests.length === 1;
+
+    const handlePrev = () => {
+      setCurrentIndex(prev => (prev > 0 ? prev - 1 : tests.length - 1));
+    };
+    const handleNext = () => {
+      setCurrentIndex(prev => (prev < tests.length - 1 ? prev + 1 : 0));
+    };
 
     return (
       <div className="testtables-column-container">
+
+        {modalOpen && (
+          <EvidenceViewer
+            src={modalImage}
+            alt="Evidencia"
+            onClose={handleCloseModal}
+          />
+        )}
+
         <div className={`testtables-column-nav ${singleItem ? 'single-item' : ''}`}>
           {!singleItem && (
-            <button
-              onClick={() =>
-                setCurrentIndex((prev) => (prev > 0 ? prev - 1 : tests.length - 1))
-              }
-              className="nav-arrow left"
-            ></button>
+            <button onClick={handlePrev} className="nav-arrow left">
+              &larr;
+            </button>
           )}
-          <div className="nav-headers">
-            <div className="nav-caption">{captionText}</div>
-            <div className="nav-id">{renderCell(currentTest.id)}</div>
+          <div className="nav-info">
+            <h3 className="nav-title">{currentItem.titulo || '-'}</h3>
+            {currentItem.descripcion && (
+              <p className="nav-description">{currentItem.descripcion}</p>
+            )}
           </div>
           {!singleItem && (
-            <button
-              onClick={() =>
-                setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0))
-              }
-              className="nav-arrow right"
-            ></button>
+            <button onClick={handleNext} className="nav-arrow right">
+              &rarr;
+            </button>
           )}
         </div>
+
         <div className="testtables-column-grid">
           {allKeys.map((key) => (
             <div key={key} className="testtables-column-row">
               <div className="grid-label">{key}:</div>
-              <div className="grid-value">{renderCell(currentTest[key])}</div>
+              <div className="grid-value">
+                {renderCell(currentItem[key], key)}
+              </div>
             </div>
           ))}
         </div>
