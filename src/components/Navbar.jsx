@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ProjectsContext } from '../context/ProjectsContext';
 import logo from '../assets/foto.jpg';
@@ -8,8 +8,16 @@ import '../styles/Navbar.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const location = useLocation();
   const { projects } = useContext(ProjectsContext);
+
+  // Monitorea el ancho de la ventana
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const routeNames = {
     '/': 'Home',
@@ -18,24 +26,15 @@ function Navbar() {
     '/contact': 'Contact'
   };
 
-  let activeTextContent = routeNames[location.pathname] || '';
-  let isProjectDetail = false;
+  // Determina si estamos en un detalle de proyecto
+  const isProjectDetail = location.pathname.startsWith('/projectdetail/');
+  
+  // Busca el proyecto actual si estamos en vista de detalle
+  const currentProject = isProjectDetail ? 
+    projects.find(p => p.id.toString() === location.pathname.split('/')[2]) : 
+    null;
 
-  // Si la ruta es de detalle de proyecto, se muestra el active link personalizado
-  if (location.pathname.startsWith('/projectdetail')) {
-    isProjectDetail = true;
-    const parts = location.pathname.split('/');
-    const projectId = parts[2];
-    const project = projects.find((p) => p.id.toString() === projectId);
-    if (project) {
-      activeTextContent = (
-        <span className="project-detail-title">
-          <span className="projects-small">Projects / </span>
-          <span className="project-name">{project.titulo}</span>
-        </span>
-      );
-    }
-  }
+  const projectTitle = currentProject ? currentProject.titulo : '';
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -53,15 +52,22 @@ function Navbar() {
       </NavLink>
 
       {/* Active link en modo móvil */}
-      <div className={`active-link ${isProjectDetail ? 'is-project-detail' : ''}`} id="active-link">
-        {activeTextContent}
+      <div className={`active-link ${isProjectDetail ? 'is-project-detail' : ''}`}>
+        {isProjectDetail ? (
+          <span className="project-detail-title">
+            <span className="projects-small">Projects / </span>
+            <span className="project-name">{projectTitle}</span>
+          </span>
+        ) : (
+          routeNames[location.pathname] || ''
+        )}
       </div>
 
       <img
         src={isOpen ? hamClose : hamOpen}
         alt="Menú"
         className="hamburguer"
-        id="hamburguer"
+        aria-expanded={isOpen}
         onClick={handleToggle}
       />
 
@@ -84,14 +90,27 @@ function Navbar() {
             About Me
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) => (isActive ? 'active' : '')}
-            onClick={closeMenu}
-          >
-            Projects
-          </NavLink>
+        <li className={windowWidth > 850 && isProjectDetail ? "project-stack-item" : ""}>
+          {windowWidth > 850 && isProjectDetail ? (
+            <>
+              <NavLink
+                to="/projects"
+                className="projects-parent"
+                onClick={closeMenu}
+              >
+                Projects
+              </NavLink>
+              <span className="current-project">{projectTitle}</span>
+            </>
+          ) : (
+            <NavLink
+              to="/projects"
+              className={({ isActive }) => (isActive || isProjectDetail ? 'active' : '')}
+              onClick={closeMenu}
+            >
+              Projects
+            </NavLink>
+          )}
         </li>
         <li>
           <NavLink

@@ -1,0 +1,225 @@
+[
+    {
+      "id": 1,
+      "titulo": "Proyecto Alpha",
+      "descripcion": "Aplicación de gestión de tareas con subtareas y múltiples estados.",
+      "tests": [
+        {
+          "tipo": "Casos de Prueba",
+          "titulo": "Casos de Prueba",
+          "descripcion": "Validar la creación, edición y eliminación de tareas.",
+          "items": [
+            {
+              "ID": "CP-101",
+              "titulo": "Creación de Tarea",
+              "descripcion": "Probar la funcionalidad para crear una nueva tarea.",
+              "precondiciones": "Usuario con sesión iniciada.",
+              "pasos": "1. Ingresar datos de la tarea. 2. Guardar.",
+              "resultadoEsperado": "La tarea se crea exitosamente.",
+              "resultadoObtenido": "La tarea aparece en la lista con un ID asignado.",
+              "estado": "Pass",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=101"
+              }
+            },
+            {
+              "ID": "CP-102",
+              "titulo": "Edición de Tarea",
+              "descripcion": "Probar la edición de una tarea existente.",
+              "precondiciones": "Debe haber una tarea creada.",
+              "pasos": "1. Seleccionar la tarea. 2. Cambiar campos. 3. Guardar.",
+              "resultadoEsperado": "Los cambios se reflejan en la tarea.",
+              "resultadoObtenido": "Se pierden algunos campos al guardar.",
+              "estado": "Fail",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=102"
+              }
+            },
+            {
+              "ID": "CP-103",
+              "titulo": "Eliminar Tarea",
+              "descripcion": "Probar la funcionalidad para eliminar una tarea.",
+              "precondiciones": "Debe existir una tarea en la lista.",
+              "pasos": "1. Seleccionar la tarea. 2. Dar clic en Eliminar.",
+              "resultadoEsperado": "La tarea se elimina del sistema.",
+              "resultadoObtenido": "La tarea permanece en la lista.",
+              "estado": "Fail",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=103"
+              }
+            }
+          ]
+        },
+        {
+          "tipo": "Reportes de Bug",
+          "titulo": "Reportes de Bug",
+          "descripcion": "Defectos encontrados en la interfaz de tareas.",
+          "items": [
+            {
+              "ID": "BUG-101",
+              "titulo": "Error en Filtro",
+              "descripcion": "El filtro de tareas completadas muestra también tareas no completadas.",
+              "steps": "1. Marcar tareas como completadas. 2. Activar filtro 'Completadas'.",
+              "resultadoEsperado": "Solo se muestran tareas completadas.",
+              "resultadoObtenido": "Aparecen también tareas en estado Pendiente.",
+              "environment": "Windows 10, Chrome 110",
+              "severityPriority": "Media / Alta",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=999"
+              }
+            },
+            {
+              "ID": "BUG-102",
+              "titulo": "Problema de Subtareas",
+              "descripcion": "Al asignar varias subtareas, algunas no se guardan.",
+              "steps": "1. Agregar 3 subtareas. 2. Guardar la tarea.",
+              "resultadoEsperado": "Las 3 subtareas deben aparecer en la tarea.",
+              "resultadoObtenido": "Solo 2 subtareas se registran.",
+              "environment": "Windows 11, Edge 110",
+              "severityPriority": "Media / Media",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=998"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "Proyecto Beta",
+      "descripcion": "E-commerce con carrito de compras y sistema de pagos.",
+      "tests": [
+        {
+          "tipo": "Casos de Prueba",
+          "titulo": "Casos de Prueba",
+          "descripcion": "Validar el flujo de compra y la aplicación de cupones.",
+          "items": [
+            {
+              "ID": "CP-201",
+              "titulo": "Flujo de Compra Completo",
+              "descripcion": "Verificar la selección de producto, checkout y pago.",
+              "precondiciones": "Usuario con sesión iniciada y productos en el catálogo.",
+              "pasos": "1. Agregar producto al carrito. 2. Realizar checkout. 3. Ingresar datos de pago.",
+              "resultadoEsperado": "La compra se registra y se descuenta el stock.",
+              "resultadoObtenido": "El stock no se descuenta.",
+              "estado": "Fail",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=201"
+              }
+            },
+            {
+              "ID": "CP-202",
+              "titulo": "Aplicar Cupón",
+              "descripcion": "Probar la funcionalidad para cupones de descuento.",
+              "precondiciones": "Usuario con un cupón válido.",
+              "pasos": "1. Agregar producto al carrito. 2. Aplicar cupón. 3. Verificar el descuento.",
+              "resultadoEsperado": "El descuento se refleja en el total.",
+              "resultadoObtenido": "Se cobra el precio completo.",
+              "estado": "Fail",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=202"
+              }
+            }
+          ]
+        },
+        {
+          "tipo": "Pruebas API",
+          "titulo": "Pruebas API",
+          "descripcion": "Endpoints de productos y checkout.",
+          "items": [
+            {
+              "ID": "API-201",
+              "titulo": "Obtener Productos",
+              "descripcion": "Probar el endpoint GET /products para listar productos.",
+              "method": "GET",
+              "endpoint": "/products",
+              "inputData": "Ninguno",
+              "resultadoEsperado": "Código 200 y lista de productos.",
+              "resultadoObtenido": "Código 200 y lista vacía.",
+              "estado": "Warning",
+              "comments": "Posible problema de conexión a la base de datos.",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=211"
+              }
+            },
+            {
+              "ID": "API-202",
+              "titulo": "Checkout",
+              "descripcion": "Verificar el endpoint POST /checkout para procesar pagos.",
+              "method": "POST",
+              "endpoint": "/checkout",
+              "inputData": "{\"userId\": 123, \"cart\": [{\"productId\": 456, \"quantity\": 2}]}",
+              "resultadoEsperado": "Código 200 y confirmación de compra.",
+              "resultadoObtenido": "Código 500, error interno.",
+              "estado": "Fail",
+              "comments": "El servidor lanza excepción al calcular impuestos.",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=212"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Proyecto Gamma",
+      "descripcion": "Aplicación móvil para seguimiento de rutinas de ejercicio.",
+      "tests": [
+        {
+          "tipo": "Casos de Prueba",
+          "titulo": "Casos de Prueba",
+          "descripcion": "Validar la creación de rutinas y el registro de progreso.",
+          "items": [
+            {
+              "ID": "CP-301",
+              "titulo": "Crear Rutina",
+              "descripcion": "Probar la creación de una nueva rutina de ejercicio.",
+              "precondiciones": "Usuario con perfil deportivo.",
+              "pasos": "1. Configurar nueva rutina. 2. Guardar.",
+              "resultadoEsperado": "La rutina aparece en la lista.",
+              "resultadoObtenido": "Se registra correctamente.",
+              "estado": "Pass",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=301"
+              }
+            },
+            {
+              "ID": "CP-302",
+              "titulo": "Editar Rutina",
+              "descripcion": "Cambiar la duración o ejercicios en la rutina.",
+              "precondiciones": "Debe existir una rutina creada.",
+              "pasos": "1. Seleccionar rutina. 2. Modificar datos. 3. Guardar.",
+              "resultadoEsperado": "Los cambios se guardan.",
+              "resultadoObtenido": "Se pierde la configuración previa.",
+              "estado": "Fail",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=302"
+              }
+            }
+          ]
+        },
+        {
+          "tipo": "Reportes de Bug",
+          "titulo": "Reportes de Bug",
+          "descripcion": "Defectos encontrados en la versión móvil iOS.",
+          "items": [
+            {
+              "ID": "BUG-301",
+              "titulo": "Crash al Iniciar",
+              "descripcion": "La app se cierra al iniciarse en dispositivos iPhone 8.",
+              "steps": "1. Abrir la app en iPhone 8. 2. Esperar 5 seg.",
+              "resultadoEsperado": "La app se muestra normalmente.",
+              "resultadoObtenido": "Ocurre un crash inmediato.",
+              "environment": "iOS 14 en iPhone 8",
+              "severityPriority": "Alta / Alta",
+              "evidencia": {
+                "imagen": "https://picsum.photos/640/480?random=303"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]

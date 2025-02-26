@@ -118,7 +118,6 @@
 
 /* ---------- BREAKPOINT: 768px - Ajustes para móviles ---------- */
 @media screen and (max-width: 768px) {
-  
   .project-detail table {
     font-size: 0.9rem;
   }

@@ -75,6 +75,17 @@ function TestTables({ tests, testType, layout }) {
 
   // ==================== LAYOUT ROW ====================
   if (computedLayout === "row") {
+    // Ordenamos las keys para mejor visualización
+    const orderedKeys = ["ID", "titulo", "descripcion", ...allKeys.filter(key => 
+      !["ID", "titulo", "descripcion"].includes(key))];
+    
+    // Elimina duplicados
+    const uniqueOrderedKeys = [...new Set(orderedKeys)];
+    
+    // Filtra keys que existen en los datos
+    const finalKeys = uniqueOrderedKeys.filter(key => 
+      allKeys.includes(key));
+
     return (
       <div className="testtables-row-container">
         {/* Renderizamos EvidenceViewer si modalOpen está en true */}
@@ -89,12 +100,12 @@ function TestTables({ tests, testType, layout }) {
         <table className="test-table">
           <thead>
             <tr className="table-caption-row">
-              <th colSpan={allKeys.length} className="table-caption-cell">
+              <th colSpan={finalKeys.length} className="table-caption-cell">
                 {captionText}
               </th>
             </tr>
             <tr>
-              {allKeys.map((key) => (
+              {finalKeys.map((key) => (
                 <th key={key}>{key}</th>
               ))}
             </tr>
@@ -102,7 +113,7 @@ function TestTables({ tests, testType, layout }) {
           <tbody>
             {tests.map((item, rowIndex) => (
               <tr key={rowIndex}>
-                {allKeys.map((key) => (
+                {finalKeys.map((key) => (
                   <td key={key}>{renderCell(item[key], key)}</td>
                 ))}
               </tr>
@@ -125,6 +136,11 @@ function TestTables({ tests, testType, layout }) {
       setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0));
     };
 
+    // Ordenamos las keys para mejor visualización
+    const priorityKeys = ["ID", "titulo", "descripcion"];
+    const otherKeys = allKeys.filter(key => !priorityKeys.includes(key));
+    const orderedKeys = [...priorityKeys.filter(key => allKeys.includes(key)), ...otherKeys];
+
     return (
       <div className="testtables-column-container">
         {modalOpen && (
@@ -145,17 +161,22 @@ function TestTables({ tests, testType, layout }) {
                 </button>
 
                 <div className="nav-title">
-                  {currentItem.ID || "-"}
+                  {currentItem.ID || currentItem.titulo || "-"}
                 </div>
                 <button onClick={handleNext} className="nav-arrow right">                  
                 </button>
               </>
             )}
+            {singleItem && (
+              <div className="nav-title">
+                {currentItem.ID || currentItem.titulo || "-"}
+              </div>
+            )}
           </div>
         </div>
 
         <div className="testtables-column-grid">
-          {allKeys
+          {orderedKeys
             .filter((key) => key !== "ID")
             .map((key) => (
               <div key={key} className="testtables-column-row">

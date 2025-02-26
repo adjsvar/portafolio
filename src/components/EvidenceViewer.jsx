@@ -50,7 +50,6 @@ function EvidenceViewer({ src, alt, onClose }) {
       <div className="ev-overlay" ref={overlayRef} onClick={handleOverlayClick}>
         <div className="ev-centerbox">
           <div className="ev-spinner"></div>
-          <p className="ev-spinner-text">Cargando imagen...</p>
         </div>
       </div>
     );

@@ -4,6 +4,7 @@
 .testtables-row-container {
   overflow-x: auto;
   margin-top: 1rem;
+  width: 100%;
 }
 
 /* Tabla */
@@ -11,12 +12,16 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  table-layout: auto;
 }
 
 .test-table th, .test-table td {
   border: 1px solid #ccc;
   padding: 0.75rem;
   text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 80px; /* Ancho mínimo para celdas */
 }
 
 .test-table th {
@@ -35,9 +40,53 @@
   border-radius: 0;
 }
 
+/* Ajustes de tamaño de fuente responsivos */
+@media screen and (max-width: 1200px) {
+  .test-table {
+    font-size: 0.9rem;
+  }
+  .test-table th, .test-table td {
+    padding: 0.65rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .test-table {
+    font-size: 0.85rem;
+  }
+  .test-table th, .test-table td {
+    padding: 0.55rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .test-table {
+    font-size: 0.8rem;
+  }
+  .test-table th, .test-table td {
+    padding: 0.5rem;
+    min-width: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .test-table {
+    font-size: 0.75rem;
+  }
+  .test-table th, .test-table td {
+    padding: 0.4rem;
+    min-width: 50px;
+  }
+  .table-caption-row .table-caption-cell {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+
 /* Layout column */
 .testtables-column-container {
   margin-top: 1rem;
+  width: 100%;
 }
 
 .testtables-column-nav {
@@ -69,7 +118,6 @@
   text-align: center;
 }
 
-
 .nav-description {
   font-size: 1rem;
   margin: 0;
@@ -82,6 +130,7 @@
 .nav-arrows-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   background-color: #e2e8f0;
 }
@@ -107,6 +156,7 @@
   box-sizing: border-box;
   background-color: #3b82f6;
   overflow: hidden;
+  position: relative;
 }
 
 /* Quitar contenido textual del botón */
@@ -136,16 +186,13 @@
   border-right: 10px solid #fff;
 }
 
-
-
-
 .nav-arrow:hover {
   background-color: #60a5fa;
 }
 
 .testtables-column-grid {
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: minmax(120px, 40%) minmax(150px, 60%);
   width: 100%;
   border-top: none;
   border-radius: 0 0 5px 5px;
@@ -158,6 +205,8 @@
 .grid-label, .grid-value {
   padding: 0.75rem;
   border: 1px solid #ccc;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .grid-label {
@@ -181,30 +230,7 @@
   color: #2563eb;
 }
 
-/* Overlay modal */
-.evidence-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.evidence-modal {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1rem;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
-}
-
-/* Media queries for better responsiveness */
+/* Media queries for better responsiveness for column layout */
 @media (max-width: 500px) {
   .testtables-column-grid {
     grid-template-columns: 40% 60%;
@@ -212,17 +238,23 @@
   
   .grid-label, .grid-value {
     padding: 0.5rem;
-    word-break: break-word;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
-  .nav-title h3 {
-    margin: 0;
-    padding: 0;
-    background-color: red;
+  .nav-title {
+    font-size: 0.9rem;
+    padding: 0.6rem;
   }
   
   .nav-description {
     font-size: 0.8rem;
+  }
+  
+  .nav-arrow {
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    margin: 0.3rem;
   }
 }

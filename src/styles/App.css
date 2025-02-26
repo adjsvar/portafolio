@@ -90,3 +90,15 @@ p {
     min-height: calc(100dvh - 144px);
   }
 }
+
+@media (max-width: 850px) {
+  /* Configuración para la página Home */
+  #home {
+    overscroll-behavior-y: none;
+  }
+  
+  /* Mejora del comportamiento de scroll en la página principal */
+  html, body {
+    overscroll-behavior-y: none;
+  }
+}

@@ -1,4 +1,4 @@
-// src/pages/Home.jsx
+// src/pages/Home.jsx - manteniendo la estructura original
 import React from "react";
 import About from "./About";
 import Projects from "./Projects";

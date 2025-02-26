@@ -46,7 +46,10 @@ function ProjectDetail() {
             <div key={index} className="test-section">
               <h3>{test.titulo || test.tipo}</h3>
               {test.descripcion && <p>{test.descripcion}</p>}
-              <TestTables tests={test.items} testType={test.tipo} />
+              {/* Contenedor para evitar que el contenido ancho rompa el layout */}
+              <div className="test-container">
+                <TestTables tests={test.items} testType={test.tipo} />
+              </div>
             </div>
           );
         })

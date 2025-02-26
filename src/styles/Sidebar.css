@@ -51,6 +51,7 @@
     border-radius: 0;
     /* Aplicamos la animación de fade in para suavizar el cambio */
     animation: fadeInSidebar 0.3s ease forwards;
+    z-index: 100;
   }
 }
 
