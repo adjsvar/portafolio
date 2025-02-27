@@ -172,13 +172,13 @@ function TestTables({ tests, testType, layout }) {
           <div className="nav-arrows-container">
             {!singleItem && (
               <>
-                <button onClick={handlePrev} className="nav-arrow left">                  
+                <button onClick={handlePrev} className="nav-arrow left" aria-label="Anterior">                  
                 </button>
 
                 <div className="nav-title">
                   {currentItem.ID || currentItem.titulo || "-"}
                 </div>
-                <button onClick={handleNext} className="nav-arrow right">                  
+                <button onClick={handleNext} className="nav-arrow right" aria-label="Siguiente">                  
                 </button>
               </>
             )}

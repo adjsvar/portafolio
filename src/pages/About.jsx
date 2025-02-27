@@ -10,7 +10,7 @@ function About() {
       {/* Contenedor adicional para centrar el grupo completo */}
       <div className="about-wrapper">
         <div className="about-info">
-          <h2>About Me</h2>
+          <h2>Sobre Mí</h2>
           <p>
             Soy un profesional en formación en Quality Assurance con enfoque analítico y atención al detalle. 
             Cuento con conocimientos en diseño y ejecución de casos de prueba, gestión de defectos con Jira y Trello, 
@@ -23,7 +23,7 @@ function About() {
           <div className="about-buttons">
             {/* Botón Contact: redirige al componente Contact */}
             <Link to="/contact" className="btn">
-              Contact
+              Contacto
             </Link>
             {/* Botón Descargar CV: descarga el archivo PDF */}
             <a href={cv} download className="btn btn-secondary">
@@ -33,25 +33,25 @@ function About() {
         </div>
 
         <div className="skills">
-          <h2>Skills</h2>
+          <h2>Habilidades</h2>
           <div className="skills-badges">
             <span className="skill-badge skill-badge-primary">QA Manual Testing</span>
-            <span className="skill-badge">Test Case Design</span>
-            <span className="skill-badge">Bug Reporting</span>
+            <span className="skill-badge">Diseño de Casos de Prueba</span>
+            <span className="skill-badge">Reporte de Errores</span>
             <span className="skill-badge">Jira</span>
             <span className="skill-badge">Trello</span>
             <span className="skill-badge skill-badge-primary">SQL</span>
-            <span className="skill-badge skill-badge-primary">API Testing (Postman)</span>
-            <span className="skill-badge">Selenium Basics</span>
+            <span className="skill-badge skill-badge-primary">Pruebas de API (Postman)</span>
+            <span className="skill-badge">Fundamentos de Selenium</span>
             <span className="skill-badge">HTML & CSS</span>
             <span className="skill-badge">JavaScript</span>
             <span className="skill-badge">Git</span>
-            <span className="skill-badge">Python Basics</span>
-            <span className="skill-badge">Node.js Basics</span>
-            <span className="skill-badge">English B2</span>
+            <span className="skill-badge">Fundamentos de Python</span>
+            <span className="skill-badge">Fundamentos de Node.js</span>
+            <span className="skill-badge">Inglés B2</span>
           </div>
           
-          <h2 className="mt-4">Soft Skills</h2>
+          <h2 className="mt-4">Habilidades Blandas</h2>
           <div className="skills-badges">
             <span className="skill-badge skill-badge-soft">Trabajo en Equipo</span>
             <span className="skill-badge skill-badge-soft">Pensamiento Analítico</span>

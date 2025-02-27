@@ -20,10 +20,10 @@ function Navbar() {
   }, []);
 
   const routeNames = {
-    '/': 'Home',
-    '/about': 'About Me',
-    '/projects': 'Projects',
-    '/contact': 'Contact'
+    '/': 'Inicio',
+    '/about': 'Sobre Mí',
+    '/projects': 'Proyectos',
+    '/contact': 'Contacto'
   };
 
   // Determina si estamos en un detalle de proyecto
@@ -55,7 +55,7 @@ function Navbar() {
       <div className={`active-link ${isProjectDetail ? 'is-project-detail' : ''}`}>
         {isProjectDetail ? (
           <span className="project-detail-title">
-            <span className="projects-small">Projects / </span>
+            <span className="projects-small">Proyectos / </span>
             <span className="project-name">{projectTitle}</span>
           </span>
         ) : (
@@ -78,7 +78,7 @@ function Navbar() {
             className={({ isActive }) => (isActive ? 'active' : '')}
             onClick={closeMenu}
           >
-            Home
+            Inicio
           </NavLink>
         </li>
         <li>
@@ -87,7 +87,7 @@ function Navbar() {
             className={({ isActive }) => (isActive ? 'active' : '')}
             onClick={closeMenu}
           >
-            About Me
+            Sobre Mí
           </NavLink>
         </li>
         <li className={windowWidth > 850 && isProjectDetail ? "project-stack-item" : ""}>
@@ -98,7 +98,7 @@ function Navbar() {
                 className="projects-parent"
                 onClick={closeMenu}
               >
-                Projects
+                Proyectos
               </NavLink>
               <span className="current-project">{projectTitle}</span>
             </>
@@ -108,7 +108,7 @@ function Navbar() {
               className={({ isActive }) => (isActive || isProjectDetail ? 'active' : '')}
               onClick={closeMenu}
             >
-              Projects
+              Proyectos
             </NavLink>
           )}
         </li>
@@ -118,7 +118,7 @@ function Navbar() {
             className={({ isActive }) => (isActive ? 'active' : '')}
             onClick={closeMenu}
           >
-            Contact
+            Contacto
           </NavLink>
         </li>
       </ul>
