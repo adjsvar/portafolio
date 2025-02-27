@@ -2,100 +2,182 @@
 
 /* Contenedor principal de la sección About */
 .about {
-    /* Centra el contenedor extra (about-wrapper) en la sección */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9fafb;
+}
+  
+/* Contenedor adicional para agrupar y alinear los dos bloques */
+.about-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+}
+  
+/* Bloque de información personal */
+.about-info {
+  flex: 1;
+  text-align: left;
+}
+
+.about-info p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.about-info p:last-of-type {
+  margin-bottom: 2rem;
+}
+  
+/* Estilos para los botones */
+.about-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+  
+.about-buttons .btn {
+  flex: 1;
+  max-width: 200px;
+}
+
+/* Agregar margen para títulos secundarios */
+.mt-4 {
+  margin-top: 2.5rem;
+}
+  
+/* Bloque de Skills */
+.skills {
+  flex: 1;
+  text-align: center;
+}
+
+.skills h2 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.skills h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: #3b82f6;
+  border-radius: 2px;
+}
+  
+.skills-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+  
+.skill-badge {
+  padding: 0.6rem 1.2rem;
+  background-color: #e0e7ff;
+  color: #1e40af;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   }
   
-  /* Contenedor adicional para agrupar y alinear los dos bloques */
+  .skill-badge:hover::before {
+    transform: translateX(100%);
+  }
+}
+
+/* Variantes de badges */
+.skill-badge-primary {
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
+.skill-badge-soft {
+  background-color: #ede9fe;
+  color: #5b21b6;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15);
+}
+
+/* Modo móvil: apilar en columna */
+@media screen and (max-width: 850px) {
   .about-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: flex-start; /* Alinea por el borde superior */
-    width: 100%;
-    max-width: 1200px; /* Opcional, para limitar el ancho */
+    flex-direction: column;
+    gap: 3rem;
   }
   
-  /* Bloque de información personal */
-  .about-info {
-    flex: 1;
-    text-align: left;
+  .about-info p {
+    font-size: 1rem;
   }
   
-  /* Estilos para los botones */
   .about-buttons {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-  
-  .btn {
-    padding: 0.75rem 1.5rem;
-    background-color: #3b82f6;
-    color: white;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .btn:hover {
-    background-color: #2563eb;
-  }
-  
-  /* Bloque de Skills */
-  .skills {
-    flex: 1;
-    text-align: center;
-  }
-  
- 
-  .skills-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
   }
   
   .skill-badge {
+    font-size: 0.9rem;
     padding: 0.5rem 1rem;
-    background-color: #e0e7ff;
-    color: #1e293b;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    cursor: default;
-    transition: background-color 0.3s ease;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
   
-  .skill-badge:hover {
-    background-color: #c7d2fe;
+  .about-buttons .btn {
+    width: 100%;
+    max-width: 100%;
   }
   
-  /* =================================
-     BREAKPOINT: 768px - Modo móvil: apilar en columna
-  ================================= */
-  @media screen and (max-width: 850px) {
-    .about-wrapper {
-      flex-direction: column;
-    }
-    
-    .about-info p {
-      font-size: 1.2rem;
-    }    
-    
-    
-    .skill-badge {
-      font-size: 0.9rem;
-    }
+  .skills-badges {
+    gap: 0.5rem;
   }
   
+  .skill-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+  }
+}

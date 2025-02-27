@@ -5,12 +5,53 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 300px;
   cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+/* Efecto hover solo para dispositivos no táctiles */
+@media (hover: hover) and (pointer: fine) {
+  .projectitem-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .projectitem-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  }
+  
+  .projectitem-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+  }
+  
+  .projectitem-item:hover::after {
+    width: 100%;
+  }
+}
+
+/* Active state para dispositivos táctiles */
+.projectitem-item:active {
+  background-color: #f9fafb;
 }
 
 /* Contenedor para la imagen */
 .projectitem-img {
   flex: 1;
+  overflow: hidden;
 }
 
 /* La imagen ocupa el 100% del contenedor de imagen */
@@ -19,37 +60,77 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .projectitem-item:hover .projectitem-img img {
+    transform: scale(1.05);
+  }
 }
 
 /* Contenedor para la descripción */
 .projectitem-desc {
   flex: 1;
-  padding: 1rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* Indicador de proyecto */
+.projectitem-desc::before {
+  content: 'PROYECTO';
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  font-weight: bold;
 }
 
 /* Estilos para el título */
 .projectitem-desc h3 {
   font-size: 1.75rem;
   color: #3b82f6;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  display: inline-block;
 }
 
 /* Estilos para el párrafo descriptivo */
 .projectitem-desc p {
   font-size: 1rem;
-  color: #293445;
+  color: #4b5563;
   line-height: 1.6;
 }
 
-/* =================================
-   BREAKPOINT: 850px - Modo móvil: layout en columna
-================================= */
+/* Ver más (indica que se puede hacer clic) */
+.projectitem-desc::after {
+  content: 'Ver detalles →';
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #3b82f6;
+  opacity: 0.8;
+}
+
+/* Modo móvil: layout en columna */
 @media screen and (max-width: 850px) {
   .projectitem-item {
     flex-direction: column;
+    height: auto;
+    max-width: 100%;
+  }
+  
+  .projectitem-img {
+    height: 220px;
   }
   
   .projectitem-img,
@@ -58,6 +139,35 @@
   }
   
   .projectitem-desc {
-    padding: 1rem 0;
+    padding: 1.5rem;
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .projectitem-desc h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .projectitem-desc {
+    padding: 1.25rem;
+  }
+  
+  .projectitem-desc h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .projectitem-desc::after {
+    font-size: 0.8rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .projectitem-desc::before {
+    font-size: 0.65rem;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }

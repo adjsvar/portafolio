@@ -73,12 +73,32 @@ h2 {
   font-weight: 700;
   color: #3b82f6;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 p {
   font-size: 1.2rem;
   text-align: justify;
+}
+
+/* Estilo común de botones */
+.btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #2563eb;
 }
 
 @media (max-width: 850px) {
@@ -88,17 +108,67 @@ p {
 
   .content {
     min-height: calc(100dvh - 144px);
+    padding: 2rem 5vw;
+  }
+  
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
   }
 }
 
-@media (max-width: 850px) {
-  /* Configuración para la página Home */
-  #home {
-    overscroll-behavior-y: none;
+@media (max-width: 600px) {
+  .content {
+    padding: 1.5rem 5vw;
   }
   
-  /* Mejora del comportamiento de scroll en la página principal */
-  html, body {
-    overscroll-behavior-y: none;
+  h1 {
+    font-size: 2.5rem;
   }
+}
+
+/* Mejora del comportamiento de scroll en la página principal */
+html, body {
+  overscroll-behavior-y: none;
+}
+
+/* Estilos adicionales para el botón secundario - Agregar a App.css */
+
+/* Botón secundario */
+.btn-secondary {
+  background-color: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(59, 130, 246, 0.1);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+  
+  .btn-secondary:hover {
+    color: #1d4ed8;
+  }
+  
+  .btn-secondary:hover::before {
+    left: 0;
+  }
+}
+
+.btn-secondary:active {
+  background-color: rgba(59, 130, 246, 0.2);
 }

@@ -2,41 +2,92 @@
    VARIABLES GLOBALES PARA FOOTER
 ================================= */
 :root {
-    --footer-bg: #0e1013;
-    --footer-color: #ffffff;
-    --footer-padding: 3rem;
-    --footer-font-size: 1.2rem;
-  }
-  
-  /* =================================
-     FOOTER ESTILOS
-  ================================= */
+  --footer-bg: #0e1013;
+  --footer-color: #ffffff;
+  --footer-padding: 3rem;
+  --footer-font-size: 1.2rem;
+  --footer-highlight: #3b82f6;
+}
+
+/* =================================
+   FOOTER ESTILOS
+================================= */
+.footer {
+  width: 100%;
+  background-color: var(--footer-bg);
+  color: var(--footer-color);
+  padding: var(--footer-padding);
+  min-height: 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Efecto de borde superior */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--footer-highlight) 50%, 
+    transparent 100%);
+}
+
+.footer p {
+  font-size: var(--footer-font-size);
+  font-weight: 300;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Añadir un pequeño detalle al copyright */
+.footer p::after {
+  content: '❤';
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--footer-highlight);
+  animation: pulse 2s infinite;
+}
+
+/* Añadir un sutil efecto de fondo */
+.footer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 10%, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    transparent 70%
+  );
+  z-index: 0;
+}
+
+/* Animación de pulso para el corazón */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* =================================
+   BREAKPOINTS 
+================================= */
+@media (max-width: 768px) {
   .footer {
-    width: 100%;
-    background-color: var(--footer-bg);
-    color: var(--footer-color);
-    padding: var(--footer-padding);
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 2.5rem 1rem;
   }
-  
   .footer p {
-    font-size: var(--footer-font-size);
-    font-weight: 300;
+    font-size: 1rem;
   }
-  
-  /* =================================
-     BREAKPOINTS (si se requieren ajustes en móviles)
-  ================================= */
-  @media (max-width: 768px) {
-    .footer {
-      padding: 3rem 1rem;
-    }
-    .footer p {
-      font-size: 1rem;
-    }
-  }
-  
+}

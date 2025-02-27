@@ -1,51 +1,5 @@
 /* src/styles/ProjectDetail.css */
 
-/* ---------- Modo Resumen (usado en ProjectItem) ---------- */
-.project-item {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.project-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.project-description {
-  padding: 1rem;
-  text-align: left;
-}
-
-.project-description h3 {
-  font-size: 1.75rem;
-  color: #3b82f6;
-  margin-bottom: 0.5rem;
-}
-
-.project-description p {
-  font-size: 1rem;
-  color: #293445;
-  line-height: 1.6;
-}
-
-.project-description a {
-  display: inline-block;
-  margin-top: 1rem;
-  background-color: #3b82f6;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.project-description a:hover {
-  background-color: #2563eb;
-}
-
 /* ---------- Modo Detalle ---------- */
 .project-detail {
   padding: 3rem 10vw;
@@ -53,7 +7,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.project-header {
+  margin-bottom: 1rem;
 }
 
 .project-detail h2 {
@@ -74,29 +34,24 @@
   font-size: 1.5rem;
 }
 
-/* Tablas para secciones en modo detalle */
-.project-detail table {
+/* Contenedor para las secciones de test */
+.test-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.test-container {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  font-size: 1rem;
+  overflow-x: auto;
 }
 
-.project-detail th,
-.project-detail td {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  text-align: left;
-}
-
-.project-detail th {
-  background-color: #f0f2f5;
-  color: #293445;
-  font-weight: bold;
-}
-
-.project-detail td {
-  background-color: #fff;
+/* No hay pruebas mensaje */
+.no-tests {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
 }
 
 /* Botón para volver a la lista de proyectos */
@@ -110,19 +65,55 @@
   text-transform: uppercase;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  margin-top: 2rem;
+  align-self: flex-start;
 }
 
 .project-detail .btn:hover {
   background-color: #2563eb;
 }
 
-/* ---------- BREAKPOINT: 768px - Ajustes para móviles ---------- */
-@media screen and (max-width: 768px) {
-  .project-detail table {
-    font-size: 0.9rem;
+/* ---------- BREAKPOINT: Ajustes para móviles ---------- */
+@media screen and (max-width: 850px) {
+  .project-detail {
+    padding: 2rem 5vw;
+    gap: 1rem;
   }
 
-  .project-item {
-    width: 100%;
+  .project-detail h2 {
+    font-size: 1.75rem;
+  }
+
+  .project-detail p {
+    font-size: 1.1rem;
+  }
+
+  .project-detail h3 {
+    font-size: 1.3rem;
+  }
+  
+  .test-section {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+  }
+  
+  .project-detail .btn {
+    padding: 0.7rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .project-detail {
+    padding: 1.5rem 5vw;
+  }
+  
+  .project-detail h2 {
+    font-size: 1.5rem;
+  }
+  
+  .test-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
   }
 }

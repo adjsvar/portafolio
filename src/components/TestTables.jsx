@@ -48,6 +48,19 @@ function TestTables({ tests, testType, layout }) {
     setModalImage("");
   };
 
+  // Agregado: Determina la clase CSS para estados en celdas
+  const getCellClass = (value, key) => {
+    if (key === 'estado' || key === 'status') {
+      if (typeof value === 'string') {
+        const lowerValue = value.toLowerCase();
+        if (lowerValue === 'pass' || lowerValue === 'ok') return 'pass';
+        if (lowerValue === 'fail' || lowerValue === 'error') return 'fail';
+        if (lowerValue === 'warning' || lowerValue === 'warn') return 'warning';
+      }
+    }
+    return '';
+  };
+
   // Render de celdas
   const renderCell = (value, key) => {
     if (key === "evidencia") {
@@ -114,7 +127,9 @@ function TestTables({ tests, testType, layout }) {
             {tests.map((item, rowIndex) => (
               <tr key={rowIndex}>
                 {finalKeys.map((key) => (
-                  <td key={key}>{renderCell(item[key], key)}</td>
+                  <td key={key} className={getCellClass(item[key], key)}>
+                    {renderCell(item[key], key)}
+                  </td>
                 ))}
               </tr>
             ))}
@@ -181,7 +196,7 @@ function TestTables({ tests, testType, layout }) {
             .map((key) => (
               <div key={key} className="testtables-column-row">
                 <div className="grid-label">{key}:</div>
-                <div className="grid-value">
+                <div className={`grid-value ${getCellClass(currentItem[key], key)}`}>
                   {renderCell(currentItem[key], key)}
                 </div>
               </div>

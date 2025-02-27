@@ -3,15 +3,7 @@
 /* Sección de Proyectos */
 .projects {
   width: 100%;
-  background-color: #f9fafb; /* Fondo claro */
-}
-
-.projects h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #3b82f6;
-  margin-bottom: 2rem;
-  text-align: center;
+  background-color: #f9fafb;
 }
 
 /* Contenedor que agrupa todos los proyectos */
@@ -20,19 +12,22 @@
   flex-direction: column;
   gap: 3rem;
   width: 100%;
+  margin-top: 1rem;
 }
 
 /* Ajustes para móviles */
 @media screen and (max-width: 850px) {
-  .projects {
-    padding: 1rem 5vw;
-  }
-  
   .projects h2 {
     font-size: 2.5rem;
   }
-  
+}
+
+@media screen and (max-width: 480px) {
   .projects-container {
-    padding: 1rem 5vw;
+    gap: 2rem;
+  }
+  
+  .projects h2 {
+    font-size: 2rem;
   }
 }
