@@ -48,14 +48,6 @@
   z-index: 1;
 }
 
-/* Añadir un pequeño detalle al copyright */
-.footer p::after {
-  content: '❤';
-  display: inline-block;
-  margin-left: 8px;
-  color: var(--footer-highlight);
-  animation: pulse 2s infinite;
-}
 
 /* Añadir un sutil efecto de fondo */
 .footer::after {
@@ -71,13 +63,6 @@
     transparent 70%
   );
   z-index: 0;
-}
-
-/* Animación de pulso para el corazón */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
 }
 
 /* =================================

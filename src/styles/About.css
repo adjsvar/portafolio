@@ -58,24 +58,6 @@
   text-align: center;
 }
 
-.skills h2 {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 1.5rem;
-}
-
-.skills h2::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 3px;
-  background-color: #3b82f6;
-  border-radius: 2px;
-}
-  
 .skills-badges {
   display: flex;
   flex-wrap: wrap;
