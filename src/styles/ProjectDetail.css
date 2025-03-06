@@ -12,17 +12,32 @@
   border-radius: 5px;
 }
 
+/* Header con imagen del proyecto */
 .project-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
   margin-bottom: 1rem;
 }
 
-/* Quitar este estilo y reemplazarlo con una clase específica si es necesario
-.project-detail h2 {
-  font-size: 2rem;
-  color: #3b82f6;
-  margin-bottom: 1rem;
+.project-image {
+  flex: 0 0 300px;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-*/
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-info {
+  flex: 1;
+}
 
 .project-detail p {
   font-size: 1.2rem;
@@ -32,8 +47,67 @@
 
 .project-detail h3 {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   color: #3b82f6;
   font-size: 1.5rem;
+}
+
+/* User Stories / Casos de Uso */
+.user-stories-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.user-stories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.user-story-card {
+  background-color: #f5f8ff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-story-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.user-story-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.user-story-id {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.user-story-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #293445;
+  margin: 0;
+}
+
+.user-story-description {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* Contenedor para las secciones de test */
@@ -41,6 +115,18 @@
   margin-top: 1.5rem;
   border-top: 1px solid #e5e7eb;
   padding-top: 1.5rem;
+}
+
+/* Estilo especial para sección de reportes de bug */
+.bug-reports-section {
+  background-color: #fef2f2;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border-left: 4px solid #ef4444;
+}
+
+.bug-reports-section h3 {
+  color: #b91c1c;
 }
 
 .test-container {
@@ -82,8 +168,22 @@
     gap: 1rem;
   }
 
+  .project-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .project-image {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
   .project-detail h2 {
     font-size: 1.75rem;
+    text-align: center;
   }
 
   .project-detail p {
@@ -92,6 +192,7 @@
 
   .project-detail h3 {
     font-size: 1.3rem;
+    text-align: center;
   }
   
   .test-section {
@@ -102,6 +203,12 @@
   .project-detail .btn {
     padding: 0.7rem 1.25rem;
     margin-top: 1.5rem;
+    align-self: center;
+  }
+  
+  .user-stories-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -117,5 +224,9 @@
   .test-section {
     margin-top: 1rem;
     padding-top: 1rem;
+  }
+  
+  .user-story-card {
+    padding: 1rem;
   }
 }

@@ -1,15 +1,10 @@
-// src/components/TestTables.jsx
 import React, { useState, useEffect } from "react";
-import EvidenceViewer from "./EvidenceViewer";
 import "../styles/TestTables.css";
 
-function TestTables({ tests, testType, layout }) {
+function TestTables({ tests, testType, layout, userStories }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Estado para mostrar/hide EvidenceViewer
   const [modalOpen, setModalOpen] = useState(false);
-  // Almacena la "imagen" (string) que se mostrará en EvidenceViewer
   const [modalImage, setModalImage] = useState("");
 
   useEffect(() => {
@@ -27,8 +22,8 @@ function TestTables({ tests, testType, layout }) {
     return <div>No hay pruebas disponibles.</div>;
   }
 
-  // Recolecta todas las claves
-  const allKeys = [...new Set(tests.flatMap((item) => Object.keys(item)))];
+  // Recolecta todas las claves - simplificado
+  const allKeys = Object.keys(tests[0] || {});
 
   // Determina título (caption)
   const captionText = testType
@@ -37,7 +32,7 @@ function TestTables({ tests, testType, layout }) {
     ? tests[0].tipo.toUpperCase()
     : "TESTS";
 
-  // --- Lógica para abrir/cerrar EvidenceViewer ---
+  // --- Lógica para abrir/cerrar modal ---
   const handleOpenModal = (imgSrc) => {
     setModalImage(imgSrc || "");
     setModalOpen(true);
@@ -48,7 +43,55 @@ function TestTables({ tests, testType, layout }) {
     setModalImage("");
   };
 
-  // Agregado: Determina la clase CSS para estados en celdas
+  // Función para encontrar la user story por ID - simplificada
+  const getUserStoryById = (id) => {
+    if (!userStories || !id) return null;
+    return userStories.find(story => story.id === id);
+  };
+
+  // Render de celdas - simplificado
+  const renderCell = (value, key) => {
+    if (key === "evidencia" && value && typeof value === "object" && value.imagen) {
+      return (
+        <span
+          className="evidence-link"
+          onClick={() => handleOpenModal(value.imagen)}
+        >
+          Ver Evidencia
+        </span>
+      );
+    }
+    
+    // Renderiza user story como un enlace
+    if (key === "userStoryId" && value) {
+      const userStory = getUserStoryById(value);
+      if (userStory) {
+        return (
+          <a href={`#${value}`} className="user-story-link">
+            {value}: {userStory.titulo}
+          </a>
+        );
+      }
+      return value;
+    }
+    
+    // Renderiza reporte de bug como un enlace
+    if (key === "reporteBugId" && value) {
+      return (
+        <a href={`#${value}`} className="bug-report-link">
+          {value}
+        </a>
+      );
+    }
+    
+    if (typeof value === "object" && value !== null) {
+      return JSON.stringify(value);
+    }
+    
+    return value === undefined || value === null || value === "" ? "-" : value;
+  };
+
+  // Determina la clase CSS para estados en celdas
   const getCellClass = (value, key) => {
     if (key === 'estado' || key === 'status') {
       if (typeof value === 'string') {
@@ -61,72 +104,49 @@ function TestTables({ tests, testType, layout }) {
     return '';
   };
 
-  // Render de celdas
-  const renderCell = (value, key) => {
-    if (key === "evidencia") {
-      if (!value || typeof value !== "object") return "-";
-      // Suponemos: item.evidencia = { imagen: "URL", video: ... }
-      if (value.imagen) {
-        // Al hacer clic => abrimos EvidenceViewer
-        return (
-          <span
-            className="evidence-link"
-            onClick={() => handleOpenModal(value.imagen)}
-          >
-            Ver Evidencia
-          </span>
-        );
-      }
-      return "-";
-    }
-    // Si es un objeto distinto a evidencia (por ejemplo un subobjeto)
-    if (typeof value === "object" && value !== null) {
-      return JSON.stringify(value);
-    }
-    return value === undefined || value === null || value === "" ? "-" : value;
-  };
-
   // ==================== LAYOUT ROW ====================
   if (computedLayout === "row") {
-    // Ordenamos las keys para mejor visualización
-    const orderedKeys = ["ID", "titulo", "descripcion", ...allKeys.filter(key => 
-      !["ID", "titulo", "descripcion"].includes(key))];
+    // Ordenamos las keys de forma simplificada
+    const priorityKeys = ["ID", "userStoryId", "titulo", "descripcion"];
+    const endKeys = ["reporteBugId", "testCaseId"];
+    const middleKeys = allKeys.filter(key => !priorityKeys.includes(key) && !endKeys.includes(key));
     
-    // Elimina duplicados
-    const uniqueOrderedKeys = [...new Set(orderedKeys)];
-    
-    // Filtra keys que existen en los datos
-    const finalKeys = uniqueOrderedKeys.filter(key => 
-      allKeys.includes(key));
+    // Creamos el orden final
+    const orderedKeys = [
+      ...priorityKeys.filter(key => allKeys.includes(key)),
+      ...middleKeys,
+      ...endKeys.filter(key => allKeys.includes(key))
+    ];
 
     return (
       <div className="testtables-row-container">
-        {/* Renderizamos EvidenceViewer si modalOpen está en true */}
         {modalOpen && (
-          <EvidenceViewer
-            src={modalImage}
-            alt="Evidencia"
-            onClose={handleCloseModal}
-          />
+          <div className="evidence-modal" onClick={handleCloseModal}>
+            <img src={modalImage} alt="Evidencia" />
+          </div>
         )}
 
         <table className="test-table">
           <thead>
             <tr className="table-caption-row">
-              <th colSpan={finalKeys.length} className="table-caption-cell">
+              <th colSpan={orderedKeys.length} className="table-caption-cell">
                 {captionText}
               </th>
             </tr>
             <tr>
-              {finalKeys.map((key) => (
-                <th key={key}>{key}</th>
+              {orderedKeys.map((key) => (
+                <th key={key}>
+                  {key === "userStoryId" ? "User Story" : 
+                   key === "reporteBugId" ? "Reporte de Bug" :
+                   key === "testCaseId" ? "Caso de Prueba" : key}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {tests.map((item, rowIndex) => (
-              <tr key={rowIndex}>
-                {finalKeys.map((key) => (
+              <tr key={rowIndex} id={item.ID || `row-${rowIndex}`}>
+                {orderedKeys.map((key) => (
                   <td key={key} className={getCellClass(item[key], key)}>
                     {renderCell(item[key], key)}
                   </td>
@@ -151,35 +171,35 @@ function TestTables({ tests, testType, layout }) {
       setCurrentIndex((prev) => (prev < tests.length - 1 ? prev + 1 : 0));
     };
 
-    // Ordenamos las keys para mejor visualización
-    const priorityKeys = ["ID", "titulo", "descripcion"];
-    const otherKeys = allKeys.filter(key => !priorityKeys.includes(key));
-    const orderedKeys = [...priorityKeys.filter(key => allKeys.includes(key)), ...otherKeys];
+    // Ordenamos las keys de forma simplificada
+    const priorityKeys = ["ID", "userStoryId", "titulo", "descripcion"];
+    const endKeys = ["reporteBugId", "testCaseId"];
+    const middleKeys = allKeys.filter(key => !priorityKeys.includes(key) && !endKeys.includes(key));
+    
+    // Creamos el orden final - excluyendo ID que va en el título
+    const orderedKeys = [
+      ...priorityKeys.filter(key => key !== "ID" && allKeys.includes(key)),
+      ...middleKeys,
+      ...endKeys.filter(key => allKeys.includes(key))
+    ];
 
     return (
       <div className="testtables-column-container">
         {modalOpen && (
-          <EvidenceViewer
-            src={modalImage}
-            alt="Evidencia"
-            onClose={handleCloseModal}
-          />
+          <div className="evidence-modal" onClick={handleCloseModal}>
+            <img src={modalImage} alt="Evidencia" />
+          </div>
         )}
 
-        <div
-          className={`testtables-column-nav ${singleItem ? "single-item" : ""}`}
-        >
+        <div className={`testtables-column-nav ${singleItem ? "single-item" : ""}`}>
           <div className="nav-arrows-container">
             {!singleItem && (
               <>
-                <button onClick={handlePrev} className="nav-arrow left" aria-label="Anterior">                  
-                </button>
-
+                <button onClick={handlePrev} className="nav-arrow left" aria-label="Anterior"></button>
                 <div className="nav-title">
                   {currentItem.ID || currentItem.titulo || "-"}
                 </div>
-                <button onClick={handleNext} className="nav-arrow right" aria-label="Siguiente">                  
-                </button>
+                <button onClick={handleNext} className="nav-arrow right" aria-label="Siguiente"></button>
               </>
             )}
             {singleItem && (
@@ -191,16 +211,18 @@ function TestTables({ tests, testType, layout }) {
         </div>
 
         <div className="testtables-column-grid">
-          {orderedKeys
-            .filter((key) => key !== "ID")
-            .map((key) => (
-              <div key={key} className="testtables-column-row">
-                <div className="grid-label">{key}:</div>
-                <div className={`grid-value ${getCellClass(currentItem[key], key)}`}>
-                  {renderCell(currentItem[key], key)}
-                </div>
+          {orderedKeys.map((key) => (
+            <div key={key} className="testtables-column-row">
+              <div className="grid-label">
+                {key === "userStoryId" ? "User Story" : 
+                 key === "reporteBugId" ? "Reporte de Bug" :
+                 key === "testCaseId" ? "Caso de Prueba" : key}:
               </div>
-            ))}
+              <div className={`grid-value ${getCellClass(currentItem[key], key)}`}>
+                {renderCell(currentItem[key], key)}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

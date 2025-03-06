@@ -17,6 +17,34 @@
   table-layout: auto;
 }
 
+/* Estilos para tablas normales */
+.test-table th {
+  background-color: #e2e8f0;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.test-table .table-caption-cell {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Estilos exclusivos para tablas de reporte de bugs */
+#bug-reports .test-table th {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+#bug-reports .test-table td {
+  background-color: #fef2f2;
+}
+
+#bug-reports .test-table .table-caption-cell {
+  background-color: #ef4444;
+}
+
 .test-table th, .test-table td {
   border: 1px solid #ccc;
   padding: 0.75rem;
@@ -26,21 +54,30 @@
   min-width: 80px; /* Ancho mínimo para celdas */
 }
 
-.test-table th {
-  background-color: #e2e8f0;
-  color: #3b82f6;
-  font-weight: bold;
-}
-
 .table-caption-row .table-caption-cell {
-  background-color: #3b82f6;
-  color: white;
-  font-weight: bold;
-  text-align: center;
   font-size: 1rem;
   padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 0;
+}
+
+/* Modal de evidencia */
+.evidence-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.evidence-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
 }
 
 /* Layout column */
@@ -106,7 +143,7 @@
   position: relative;
 }
 
-/* Flecha para botón de la derecha */
+/* Flechas */
 .nav-arrow.right::before {
   content: "";
   position: absolute;
@@ -117,7 +154,6 @@
   border-left: 10px solid #fff;
 }
 
-/* Flecha para botón de la izquierda */
 .nav-arrow.left::before {
   content: "";
   position: absolute;
@@ -161,7 +197,7 @@
   color: #293445;
 }
 
-/* Enlace para la evidencia */
+/* Enlaces */
 .evidence-link {
   color: #3b82f6;
   text-decoration: underline;
@@ -173,11 +209,79 @@
   color: #2563eb;
 }
 
-/* Ajustes de tamaño de fuente responsivos */
+.user-story-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  background-color: #ebf5ff;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.user-story-link:hover {
+  background-color: #dbeafe;
+}
+
+.bug-report-link {
+  color: #b91c1c;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  background-color: #fee2e2;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.bug-report-link:hover {
+  background-color: #fecaca;
+}
+
+.test-case-link {
+  color: #4d7c0f;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  background-color: #ecfccb;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.test-case-link:hover {
+  background-color: #d9f99d;
+}
+
+/* Estados */
+.pass {
+  background-color: #dcfce7;
+  color: #15803d;
+  font-weight: 500;
+}
+
+.fail {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-weight: 500;
+}
+
+.warning {
+  background-color: #fef3c7;
+  color: #92400e;
+  font-weight: 500;
+}
+
+/* Responsive ajustes */
 @media screen and (max-width: 850px) {
   .test-table {
     font-size: 0.9rem;
   }
+  
   .test-table th, .test-table td {
     padding: 0.65rem;
   }
@@ -194,11 +298,13 @@
 @media screen and (max-width: 600px) {
   .test-table {
     font-size: 0.85rem;
+    min-width: 500px; /* Asegura el scroll horizontal */
   }
+  
   .test-table th, .test-table td {
     padding: 0.5rem;
-    min-width: 60px;
   }
+  
   .table-caption-row .table-caption-cell {
     font-size: 0.9rem;
     padding: 0.6rem;

@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ProjectItem.css';
 
-function ProjectItem({ id, titulo, descripcion }) {
+function ProjectItem({ id, titulo, descripcion, imagen }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -13,10 +13,9 @@ function ProjectItem({ id, titulo, descripcion }) {
   return (
     <div className="projectitem-item" onClick={handleClick}>
       <div className="projectitem-img">
-        {/* Si en el futuro quieres usar una imagen específica 
-            podrías incluirla aquí, por ahora usamos un fallback. */}
+        {/* Usar la imagen proporcionada, o un placeholder si no hay imagen */}
         <img
-          src={`https://picsum.photos/600/400?random=${id}`}
+          src={imagen || `https://picsum.photos/600/400?random=${id}`}
           alt={`Proyecto ${titulo}`}
         />
       </div>

@@ -1,225 +1,721 @@
 [
-    {
-      "id": 1,
-      "titulo": "Proyecto Alpha",
-      "descripcion": "Aplicación de gestión de tareas con subtareas y múltiples estados.",
-      "tests": [
-        {
-          "tipo": "Casos de Prueba",
-          "titulo": "Casos de Prueba",
-          "descripcion": "Validar la creación, edición y eliminación de tareas.",
-          "items": [
-            {
-              "ID": "CP-101",
-              "titulo": "Creación de Tarea",
-              "descripcion": "Probar la funcionalidad para crear una nueva tarea.",
-              "precondiciones": "Usuario con sesión iniciada.",
-              "pasos": "1. Ingresar datos de la tarea. 2. Guardar.",
-              "resultadoEsperado": "La tarea se crea exitosamente.",
-              "resultadoObtenido": "La tarea aparece en la lista con un ID asignado.",
-              "estado": "Pass",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=101"
-              }
-            },
-            {
-              "ID": "CP-102",
-              "titulo": "Edición de Tarea",
-              "descripcion": "Probar la edición de una tarea existente.",
-              "precondiciones": "Debe haber una tarea creada.",
-              "pasos": "1. Seleccionar la tarea. 2. Cambiar campos. 3. Guardar.",
-              "resultadoEsperado": "Los cambios se reflejan en la tarea.",
-              "resultadoObtenido": "Se pierden algunos campos al guardar.",
-              "estado": "Fail",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=102"
-              }
-            },
-            {
-              "ID": "CP-103",
-              "titulo": "Eliminar Tarea",
-              "descripcion": "Probar la funcionalidad para eliminar una tarea.",
-              "precondiciones": "Debe existir una tarea en la lista.",
-              "pasos": "1. Seleccionar la tarea. 2. Dar clic en Eliminar.",
-              "resultadoEsperado": "La tarea se elimina del sistema.",
-              "resultadoObtenido": "La tarea permanece en la lista.",
-              "estado": "Fail",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=103"
-              }
+  {
+    "id": 1,
+    "titulo": "Proyecto Alpha",
+    "descripcion": "Aplicación de gestión de tareas con subtareas y múltiples estados.",
+    "imagen": "https://picsum.photos/800/600?random=1001",
+    "userStories": [
+      {
+        "id": "US-101",
+        "titulo": "Creación de tareas",
+        "descripcion": "Como usuario quiero poder crear tareas con título, descripción y fecha de vencimiento."
+      },
+      {
+        "id": "US-102",
+        "titulo": "Edición de tareas",
+        "descripcion": "Como usuario quiero poder editar los detalles de una tarea existente."
+      },
+      {
+        "id": "US-103",
+        "titulo": "Eliminación de tareas",
+        "descripcion": "Como usuario quiero poder eliminar tareas que ya no necesito."
+      }
+    ],
+    "tests": [
+      {
+        "tipo": "Casos de Prueba",
+        "titulo": "Casos de Prueba",
+        "descripcion": "Validar la creación, edición y eliminación de tareas.",
+        "items": [
+          {
+            "ID": "CP-101",
+            "titulo": "Creación de Tarea",
+            "descripcion": "Probar la funcionalidad para crear una nueva tarea.",
+            "userStoryId": "US-101",
+            "precondiciones": "Usuario con sesión iniciada.",
+            "pasos": "1. Ingresar datos de la tarea. 2. Guardar.",
+            "resultadoEsperado": "La tarea se crea exitosamente.",
+            "resultadoObtenido": "La tarea aparece en la lista con un ID asignado.",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=101"
             }
-          ]
-        },
-        {
-          "tipo": "Reportes de Bug",
-          "titulo": "Reportes de Bug",
-          "descripcion": "Defectos encontrados en la interfaz de tareas.",
-          "items": [
-            {
-              "ID": "BUG-101",
-              "titulo": "Error en Filtro",
-              "descripcion": "El filtro de tareas completadas muestra también tareas no completadas.",
-              "steps": "1. Marcar tareas como completadas. 2. Activar filtro 'Completadas'.",
-              "resultadoEsperado": "Solo se muestran tareas completadas.",
-              "resultadoObtenido": "Aparecen también tareas en estado Pendiente.",
-              "environment": "Windows 10, Chrome 110",
-              "severityPriority": "Media / Alta",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=999"
-              }
-            },
-            {
-              "ID": "BUG-102",
-              "titulo": "Problema de Subtareas",
-              "descripcion": "Al asignar varias subtareas, algunas no se guardan.",
-              "steps": "1. Agregar 3 subtareas. 2. Guardar la tarea.",
-              "resultadoEsperado": "Las 3 subtareas deben aparecer en la tarea.",
-              "resultadoObtenido": "Solo 2 subtareas se registran.",
-              "environment": "Windows 11, Edge 110",
-              "severityPriority": "Media / Media",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=998"
-              }
+          },
+          {
+            "ID": "CP-102",
+            "titulo": "Edición de Tarea",
+            "descripcion": "Probar la edición de una tarea existente.",
+            "userStoryId": "US-102",
+            "precondiciones": "Debe haber una tarea creada.",
+            "pasos": "1. Seleccionar la tarea. 2. Cambiar campos. 3. Guardar.",
+            "resultadoEsperado": "Los cambios se reflejan en la tarea.",
+            "resultadoObtenido": "Se pierden algunos campos al guardar.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-101",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=102"
             }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "titulo": "Proyecto Beta",
-      "descripcion": "E-commerce con carrito de compras y sistema de pagos.",
-      "tests": [
-        {
-          "tipo": "Casos de Prueba",
-          "titulo": "Casos de Prueba",
-          "descripcion": "Validar el flujo de compra y la aplicación de cupones.",
-          "items": [
-            {
-              "ID": "CP-201",
-              "titulo": "Flujo de Compra Completo",
-              "descripcion": "Verificar la selección de producto, checkout y pago.",
-              "precondiciones": "Usuario con sesión iniciada y productos en el catálogo.",
-              "pasos": "1. Agregar producto al carrito. 2. Realizar checkout. 3. Ingresar datos de pago.",
-              "resultadoEsperado": "La compra se registra y se descuenta el stock.",
-              "resultadoObtenido": "El stock no se descuenta.",
-              "estado": "Fail",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=201"
-              }
-            },
-            {
-              "ID": "CP-202",
-              "titulo": "Aplicar Cupón",
-              "descripcion": "Probar la funcionalidad para cupones de descuento.",
-              "precondiciones": "Usuario con un cupón válido.",
-              "pasos": "1. Agregar producto al carrito. 2. Aplicar cupón. 3. Verificar el descuento.",
-              "resultadoEsperado": "El descuento se refleja en el total.",
-              "resultadoObtenido": "Se cobra el precio completo.",
-              "estado": "Fail",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=202"
-              }
+          },
+          {
+            "ID": "CP-103",
+            "titulo": "Eliminar Tarea",
+            "descripcion": "Probar la funcionalidad para eliminar una tarea.",
+            "userStoryId": "US-103",
+            "precondiciones": "Debe existir una tarea en la lista.",
+            "pasos": "1. Seleccionar la tarea. 2. Dar clic en Eliminar.",
+            "resultadoEsperado": "La tarea se elimina del sistema.",
+            "resultadoObtenido": "La tarea permanece en la lista.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-102",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=103"
             }
-          ]
-        },
-        {
-          "tipo": "Pruebas API",
-          "titulo": "Pruebas API",
-          "descripcion": "Endpoints de productos y checkout.",
-          "items": [
-            {
-              "ID": "API-201",
-              "titulo": "Obtener Productos",
-              "descripcion": "Probar el endpoint GET /products para listar productos.",
-              "method": "GET",
-              "endpoint": "/products",
-              "inputData": "Ninguno",
-              "resultadoEsperado": "Código 200 y lista de productos.",
-              "resultadoObtenido": "Código 200 y lista vacía.",
-              "estado": "Warning",
-              "comments": "Posible problema de conexión a la base de datos.",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=211"
-              }
-            },
-            {
-              "ID": "API-202",
-              "titulo": "Checkout",
-              "descripcion": "Verificar el endpoint POST /checkout para procesar pagos.",
-              "method": "POST",
-              "endpoint": "/checkout",
-              "inputData": "{\"userId\": 123, \"cart\": [{\"productId\": 456, \"quantity\": 2}]}",
-              "resultadoEsperado": "Código 200 y confirmación de compra.",
-              "resultadoObtenido": "Código 500, error interno.",
-              "estado": "Fail",
-              "comments": "El servidor lanza excepción al calcular impuestos.",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=212"
-              }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas API",
+        "titulo": "Pruebas API",
+        "descripcion": "Endpoints de gestión de tareas.",
+        "items": [
+          {
+            "ID": "API-101",
+            "titulo": "Obtener Tareas",
+            "descripcion": "Probar el endpoint GET /tasks para listar tareas.",
+            "userStoryId": "US-101",
+            "method": "GET",
+            "endpoint": "/tasks",
+            "inputData": "Ninguno",
+            "resultadoEsperado": "Código 200 y lista de tareas.",
+            "resultadoObtenido": "Código 200 y lista correcta.",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "comments": "La respuesta incluye todas las tareas esperadas.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=111"
             }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "titulo": "Proyecto Gamma",
-      "descripcion": "Aplicación móvil para seguimiento de rutinas de ejercicio.",
-      "tests": [
-        {
-          "tipo": "Casos de Prueba",
-          "titulo": "Casos de Prueba",
-          "descripcion": "Validar la creación de rutinas y el registro de progreso.",
-          "items": [
-            {
-              "ID": "CP-301",
-              "titulo": "Crear Rutina",
-              "descripcion": "Probar la creación de una nueva rutina de ejercicio.",
-              "precondiciones": "Usuario con perfil deportivo.",
-              "pasos": "1. Configurar nueva rutina. 2. Guardar.",
-              "resultadoEsperado": "La rutina aparece en la lista.",
-              "resultadoObtenido": "Se registra correctamente.",
-              "estado": "Pass",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=301"
-              }
-            },
-            {
-              "ID": "CP-302",
-              "titulo": "Editar Rutina",
-              "descripcion": "Cambiar la duración o ejercicios en la rutina.",
-              "precondiciones": "Debe existir una rutina creada.",
-              "pasos": "1. Seleccionar rutina. 2. Modificar datos. 3. Guardar.",
-              "resultadoEsperado": "Los cambios se guardan.",
-              "resultadoObtenido": "Se pierde la configuración previa.",
-              "estado": "Fail",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=302"
-              }
+          },
+          {
+            "ID": "API-102",
+            "titulo": "Crear Tarea",
+            "descripcion": "Probar el endpoint POST /tasks para crear una tarea.",
+            "userStoryId": "US-101",
+            "method": "POST",
+            "endpoint": "/tasks",
+            "inputData": "{\"title\": \"Nueva tarea\", \"description\": \"Descripción\", \"dueDate\": \"2025-03-15\"}",
+            "resultadoEsperado": "Código 201 y datos de la tarea creada.",
+            "resultadoObtenido": "Código 400, error de validación.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-103",
+            "comments": "El API no acepta el formato de fecha.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=112"
             }
-          ]
-        },
-        {
-          "tipo": "Reportes de Bug",
-          "titulo": "Reportes de Bug",
-          "descripcion": "Defectos encontrados en la versión móvil iOS.",
-          "items": [
-            {
-              "ID": "BUG-301",
-              "titulo": "Crash al Iniciar",
-              "descripcion": "La app se cierra al iniciarse en dispositivos iPhone 8.",
-              "steps": "1. Abrir la app en iPhone 8. 2. Esperar 5 seg.",
-              "resultadoEsperado": "La app se muestra normalmente.",
-              "resultadoObtenido": "Ocurre un crash inmediato.",
-              "environment": "iOS 14 en iPhone 8",
-              "severityPriority": "Alta / Alta",
-              "evidencia": {
-                "imagen": "https://picsum.photos/640/480?random=303"
-              }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas de Rendimiento",
+        "titulo": "Pruebas de Rendimiento",
+        "descripcion": "Evaluación de tiempos de respuesta y carga de la aplicación.",
+        "items": [
+          {
+            "ID": "PR-101",
+            "titulo": "Carga de Lista de Tareas",
+            "descripcion": "Medir el tiempo de carga de la lista con 1000 tareas.",
+            "userStoryId": "US-101",
+            "herramienta": "JMeter",
+            "usuarios": 50,
+            "tiempoEsperado": "< 2 segundos",
+            "tiempoObtenido": "4.5 segundos",
+            "estado": "Fail",
+            "reporteBugId": "BUG-104",
+            "comments": "La consulta a la base de datos no está optimizada.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=121"
             }
-          ]
-        }
-      ]
-    }
-  ]
+          },
+          {
+            "ID": "PR-102",
+            "titulo": "Tiempo de Respuesta de Edición",
+            "descripcion": "Medir el tiempo de respuesta al editar una tarea.",
+            "userStoryId": "US-102",
+            "herramienta": "JMeter",
+            "usuarios": 20,
+            "tiempoEsperado": "< 1 segundo",
+            "tiempoObtenido": "0.8 segundos",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "comments": "El tiempo de respuesta está dentro de los parámetros aceptables.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=122"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Reportes de Bug",
+        "titulo": "Reportes de Bug",
+        "descripcion": "Defectos encontrados en la aplicación.",
+        "items": [
+          {
+            "ID": "BUG-101",
+            "titulo": "Error en Guardado de Campos",
+            "descripcion": "Al editar una tarea, algunos campos no se guardan correctamente.",
+            "userStoryId": "US-102",
+            "testCaseId": "CP-102",
+            "steps": "1. Seleccionar tarea. 2. Modificar varios campos. 3. Guardar.",
+            "resultadoEsperado": "Todos los campos se guardan correctamente.",
+            "resultadoObtenido": "Los campos de fecha y etiquetas no se guardan.",
+            "environment": "Windows 10, Chrome 110",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=999"
+            }
+          },
+          {
+            "ID": "BUG-102",
+            "titulo": "Fallo en Eliminación de Tareas",
+            "descripcion": "Las tareas no se eliminan al usar la función correspondiente.",
+            "userStoryId": "US-103",
+            "testCaseId": "CP-103",
+            "steps": "1. Seleccionar tarea. 2. Dar clic en Eliminar.",
+            "resultadoEsperado": "La tarea se elimina del sistema.",
+            "resultadoObtenido": "La tarea permanece en la lista.",
+            "environment": "Windows 11, Edge 110",
+            "severityPriority": "Alta / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=998"
+            }
+          },
+          {
+            "ID": "BUG-103",
+            "titulo": "Error de Validación de Fecha",
+            "descripcion": "El API rechaza fechas en formato ISO estándar.",
+            "userStoryId": "US-101",
+            "testCaseId": "API-102",
+            "steps": "1. Enviar POST con datos de tarea incluyendo fecha.",
+            "resultadoEsperado": "La tarea se crea con la fecha especificada.",
+            "resultadoObtenido": "Error 400 de validación de fecha.",
+            "environment": "Postman, Windows 10",
+            "severityPriority": "Alta / Media",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=112"
+            }
+          },
+          {
+            "ID": "BUG-104",
+            "titulo": "Bajo Rendimiento en Carga de Tareas",
+            "descripcion": "La lista de tareas tarda demasiado en cargar con muchos registros.",
+            "userStoryId": "US-101",
+            "testCaseId": "PR-101",
+            "steps": "1. Cargar lista con 1000 tareas.",
+            "resultadoEsperado": "Tiempo de carga menor a 2 segundos.",
+            "resultadoObtenido": "Tiempo de carga de 4.5 segundos.",
+            "environment": "Windows 10, Chrome 110, 16GB RAM",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=121"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Proyecto Beta",
+    "descripcion": "E-commerce con carrito de compras y sistema de pagos.",
+    "imagen": "https://picsum.photos/800/600?random=1002",
+    "userStories": [
+      {
+        "id": "US-201",
+        "titulo": "Flujo de compra",
+        "descripcion": "Como cliente quiero poder seleccionar productos, agregarlos al carrito y finalizar la compra."
+      },
+      {
+        "id": "US-202",
+        "titulo": "Aplicación de cupones",
+        "descripcion": "Como cliente quiero poder aplicar cupones de descuento en mi compra."
+      },
+      {
+        "id": "US-203",
+        "titulo": "Historial de pedidos",
+        "descripcion": "Como cliente quiero poder ver mi historial de pedidos y su estado."
+      }
+    ],
+    "tests": [
+      {
+        "tipo": "Casos de Prueba",
+        "titulo": "Casos de Prueba",
+        "descripcion": "Validar el flujo de compra y la aplicación de cupones.",
+        "items": [
+          {
+            "ID": "CP-201",
+            "titulo": "Flujo de Compra Completo",
+            "descripcion": "Verificar la selección de producto, checkout y pago.",
+            "userStoryId": "US-201",
+            "precondiciones": "Usuario con sesión iniciada y productos en el catálogo.",
+            "pasos": "1. Agregar producto al carrito. 2. Realizar checkout. 3. Ingresar datos de pago.",
+            "resultadoEsperado": "La compra se registra y se descuenta el stock.",
+            "resultadoObtenido": "El stock no se descuenta.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-201",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=201"
+            }
+          },
+          {
+            "ID": "CP-202",
+            "titulo": "Aplicar Cupón",
+            "descripcion": "Probar la funcionalidad para cupones de descuento.",
+            "userStoryId": "US-202",
+            "precondiciones": "Usuario con un cupón válido.",
+            "pasos": "1. Agregar producto al carrito. 2. Aplicar cupón. 3. Verificar el descuento.",
+            "resultadoEsperado": "El descuento se refleja en el total.",
+            "resultadoObtenido": "Se cobra el precio completo.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-202",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=202"
+            }
+          },
+          {
+            "ID": "CP-203",
+            "titulo": "Ver Historial de Pedidos",
+            "descripcion": "Verificar la visualización del historial de pedidos del usuario.",
+            "userStoryId": "US-203",
+            "precondiciones": "Usuario con pedidos previos.",
+            "pasos": "1. Acceder a la sección de historial. 2. Verificar lista de pedidos.",
+            "resultadoEsperado": "Se muestra la lista de pedidos con su estado.",
+            "resultadoObtenido": "La lista se muestra correctamente.",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=203"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas API",
+        "titulo": "Pruebas API",
+        "descripcion": "Endpoints de productos y checkout.",
+        "items": [
+          {
+            "ID": "API-201",
+            "titulo": "Obtener Productos",
+            "descripcion": "Probar el endpoint GET /products para listar productos.",
+            "userStoryId": "US-201",
+            "method": "GET",
+            "endpoint": "/products",
+            "inputData": "Ninguno",
+            "resultadoEsperado": "Código 200 y lista de productos.",
+            "resultadoObtenido": "Código 200 y lista vacía.",
+            "estado": "Warning",
+            "reporteBugId": "",
+            "comments": "Posible problema de conexión a la base de datos.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=211"
+            }
+          },
+          {
+            "ID": "API-202",
+            "titulo": "Checkout",
+            "descripcion": "Verificar el endpoint POST /checkout para procesar pagos.",
+            "userStoryId": "US-201",
+            "method": "POST",
+            "endpoint": "/checkout",
+            "inputData": "{\"userId\": 123, \"cart\": [{\"productId\": 456, \"quantity\": 2}]}",
+            "resultadoEsperado": "Código 200 y confirmación de compra.",
+            "resultadoObtenido": "Código 500, error interno.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-203",
+            "comments": "El servidor lanza excepción al calcular impuestos.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=212"
+            }
+          },
+          {
+            "ID": "API-203",
+            "titulo": "Aplicar Cupón",
+            "descripcion": "Verificar el endpoint POST /coupons/apply.",
+            "userStoryId": "US-202",
+            "method": "POST",
+            "endpoint": "/coupons/apply",
+            "inputData": "{\"cartId\": 789, \"couponCode\": \"DISCOUNT20\"}",
+            "resultadoEsperado": "Código 200 y descuento aplicado.",
+            "resultadoObtenido": "Código 200 pero sin aplicar descuento.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-204",
+            "comments": "La respuesta indica éxito pero no aplica el descuento.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=213"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas de Rendimiento",
+        "titulo": "Pruebas de Rendimiento",
+        "descripcion": "Evaluación de tiempos de respuesta bajo carga.",
+        "items": [
+          {
+            "ID": "PR-201",
+            "titulo": "Carga de Catálogo",
+            "descripcion": "Medir el tiempo de carga del catálogo con 5000 productos.",
+            "userStoryId": "US-201",
+            "herramienta": "JMeter",
+            "usuarios": 100,
+            "tiempoEsperado": "< 3 segundos",
+            "tiempoObtenido": "2.8 segundos",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "comments": "El rendimiento es aceptable bajo carga alta.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=221"
+            }
+          },
+          {
+            "ID": "PR-202",
+            "titulo": "Proceso de Checkout",
+            "descripcion": "Medir el tiempo de proceso de checkout completo.",
+            "userStoryId": "US-201",
+            "herramienta": "JMeter",
+            "usuarios": 50,
+            "tiempoEsperado": "< 5 segundos",
+            "tiempoObtenido": "8.3 segundos",
+            "estado": "Fail",
+            "reporteBugId": "BUG-205",
+            "comments": "El procesamiento de pago toma demasiado tiempo.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=222"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Reportes de Bug",
+        "titulo": "Reportes de Bug",
+        "descripcion": "Defectos encontrados en el e-commerce.",
+        "items": [
+          {
+            "ID": "BUG-201",
+            "titulo": "Error en Descuento de Stock",
+            "descripcion": "El stock no se descuenta al completar una compra.",
+            "userStoryId": "US-201",
+            "testCaseId": "CP-201",
+            "steps": "1. Agregar producto al carrito. 2. Realizar checkout. 3. Ingresar datos de pago.",
+            "resultadoEsperado": "El stock se descuenta en la cantidad comprada.",
+            "resultadoObtenido": "El stock permanece igual que antes de la compra.",
+            "environment": "Windows 10, Chrome 110",
+            "severityPriority": "Alta / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=211"
+            }
+          },
+          {
+            "ID": "BUG-202",
+            "titulo": "Fallo en Aplicación de Cupones",
+            "descripcion": "Los cupones de descuento no se aplican al monto total.",
+            "userStoryId": "US-202",
+            "testCaseId": "CP-202",
+            "steps": "1. Agregar producto al carrito. 2. Aplicar cupón válido. 3. Verificar total.",
+            "resultadoEsperado": "El total refleja el descuento del cupón aplicado.",
+            "resultadoObtenido": "El total se mantiene sin cambios al aplicar el cupón.",
+            "environment": "Windows 11, Firefox 115",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=212"
+            }
+          },
+          {
+            "ID": "BUG-203",
+            "titulo": "Error en Cálculo de Impuestos",
+            "descripcion": "El endpoint de checkout genera error interno al calcular impuestos.",
+            "userStoryId": "US-201",
+            "testCaseId": "API-202",
+            "steps": "1. Enviar datos de checkout. 2. Verificar respuesta.",
+            "resultadoEsperado": "Código 200 y confirmación de compra.",
+            "resultadoObtenido": "Código 500, error interno en el servidor.",
+            "environment": "API Testing Tool, Windows 10",
+            "severityPriority": "Alta / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=213"
+            }
+          },
+          {
+            "ID": "BUG-204",
+            "titulo": "Cupones no Aplicados",
+            "descripcion": "API informa éxito al aplicar cupón pero no aplica el descuento.",
+            "userStoryId": "US-202",
+            "testCaseId": "API-203",
+            "steps": "1. Enviar código de cupón. 2. Verificar descuento.",
+            "resultadoEsperado": "Cupón aplicado con descuento correspondiente.",
+            "resultadoObtenido": "Respuesta positiva pero sin aplicar descuento.",
+            "environment": "API Testing Tool, macOS",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=214"
+            }
+          },
+          {
+            "ID": "BUG-205",
+            "titulo": "Lentitud en Proceso de Checkout",
+            "descripcion": "El proceso de checkout toma demasiado tiempo bajo carga.",
+            "userStoryId": "US-201",
+            "testCaseId": "PR-202",
+            "steps": "1. Realizar proceso de checkout con 50 usuarios simultáneos.",
+            "resultadoEsperado": "Tiempo de respuesta menor a 5 segundos.",
+            "resultadoObtenido": "Tiempo de respuesta de 8.3 segundos.",
+            "environment": "Servidor AWS t2.large, JMeter",
+            "severityPriority": "Alta / Media",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=222"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Proyecto Gamma",
+    "descripcion": "Aplicación móvil para seguimiento de rutinas de ejercicio.",
+    "imagen": "https://picsum.photos/800/600?random=1003",
+    "userStories": [
+      {
+        "id": "US-301",
+        "titulo": "Crear rutina",
+        "descripcion": "Como usuario quiero crear una rutina personalizada de ejercicios."
+      },
+      {
+        "id": "US-302",
+        "titulo": "Editar rutina",
+        "descripcion": "Como usuario quiero poder modificar mis rutinas existentes."
+      },
+      {
+        "id": "US-303",
+        "titulo": "Seguimiento de progreso",
+        "descripcion": "Como usuario quiero poder ver mi progreso a lo largo del tiempo."
+      }
+    ],
+    "tests": [
+      {
+        "tipo": "Casos de Prueba",
+        "titulo": "Casos de Prueba",
+        "descripcion": "Validar la creación de rutinas y el registro de progreso.",
+        "items": [
+          {
+            "ID": "CP-301",
+            "titulo": "Crear Rutina",
+            "descripcion": "Probar la creación de una nueva rutina de ejercicio.",
+            "userStoryId": "US-301",
+            "precondiciones": "Usuario con perfil deportivo.",
+            "pasos": "1. Configurar nueva rutina. 2. Guardar.",
+            "resultadoEsperado": "La rutina aparece en la lista.",
+            "resultadoObtenido": "Se registra correctamente.",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=301"
+            }
+          },
+          {
+            "ID": "CP-302",
+            "titulo": "Editar Rutina",
+            "descripcion": "Cambiar la duración o ejercicios en la rutina.",
+            "userStoryId": "US-302",
+            "precondiciones": "Debe existir una rutina creada.",
+            "pasos": "1. Seleccionar rutina. 2. Modificar datos. 3. Guardar.",
+            "resultadoEsperado": "Los cambios se guardan.",
+            "resultadoObtenido": "Se pierde la configuración previa.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-302",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=302"
+            }
+          },
+          {
+            "ID": "CP-303",
+            "titulo": "Ver Progreso",
+            "descripcion": "Visualizar el progreso de entrenamiento.",
+            "userStoryId": "US-303",
+            "precondiciones": "Usuario con historial de rutinas completadas.",
+            "pasos": "1. Acceder a sección de progreso. 2. Seleccionar período.",
+            "resultadoEsperado": "Se muestra gráfico de evolución.",
+            "resultadoObtenido": "El gráfico no muestra todos los datos históricos.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-303",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=303"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas API",
+        "titulo": "Pruebas API",
+        "descripcion": "Endpoints de rutinas y progreso.",
+        "items": [
+          {
+            "ID": "API-301",
+            "titulo": "Guardar Rutina",
+            "descripcion": "Probar el endpoint POST /routines.",
+            "userStoryId": "US-301",
+            "method": "POST",
+            "endpoint": "/routines",
+            "inputData": "{\"name\": \"Rutina HIIT\", \"exercises\": [...]}",
+            "resultadoEsperado": "Código 201 y datos de la rutina creada.",
+            "resultadoObtenido": "Código 201 y datos correctos.",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "comments": "La API procesa correctamente los datos de la rutina.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=311"
+            }
+          },
+          {
+            "ID": "API-302",
+            "titulo": "Obtener Progreso",
+            "descripcion": "Probar el endpoint GET /progress.",
+            "userStoryId": "US-303",
+            "method": "GET",
+            "endpoint": "/progress?userId=123&period=30",
+            "inputData": "Ninguno",
+            "resultadoEsperado": "Código 200 y datos de progreso.",
+            "resultadoObtenido": "Código 200 pero datos parciales.",
+            "estado": "Fail",
+            "reporteBugId": "BUG-304",
+            "comments": "Los datos más antiguos de 15 días no se incluyen.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=312"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Pruebas de Rendimiento",
+        "titulo": "Pruebas de Rendimiento",
+        "descripcion": "Rendimiento en dispositivos móviles.",
+        "items": [
+          {
+            "ID": "PR-301",
+            "titulo": "Inicio de Aplicación",
+            "descripcion": "Medir el tiempo de inicio de la aplicación.",
+            "userStoryId": "US-301",
+            "herramienta": "Firebase Performance Monitoring",
+            "dispositivos": "10 modelos diferentes",
+            "tiempoEsperado": "< 2 segundos",
+            "tiempoObtenido": "3.2 segundos",
+            "estado": "Fail",
+            "reporteBugId": "BUG-305",
+            "comments": "En dispositivos de gama baja el tiempo excede lo aceptable.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=321"
+            }
+          },
+          {
+            "ID": "PR-302",
+            "titulo": "Carga de Gráficos",
+            "descripcion": "Medir el tiempo de generación de gráficos de progreso.",
+            "userStoryId": "US-303",
+            "herramienta": "Firebase Performance Monitoring",
+            "dispositivos": "5 modelos diferentes",
+            "tiempoEsperado": "< 1 segundo",
+            "tiempoObtenido": "0.9 segundos",
+            "estado": "Pass",
+            "reporteBugId": "",
+            "comments": "El rendimiento es aceptable en todos los dispositivos.",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=322"
+            }
+          }
+        ]
+      },
+      {
+        "tipo": "Reportes de Bug",
+        "titulo": "Reportes de Bug",
+        "descripcion": "Defectos encontrados en la versión móvil.",
+        "items": [
+          {
+            "ID": "BUG-301",
+            "titulo": "Crash al Iniciar",
+            "descripcion": "La app se cierra al iniciarse en dispositivos iPhone 8.",
+            "userStoryId": "US-301",
+            "testCaseId": "",
+            "steps": "1. Abrir la app en iPhone 8. 2. Esperar 5 seg.",
+            "resultadoEsperado": "La app se muestra normalmente.",
+            "resultadoObtenido": "Ocurre un crash inmediato.",
+            "environment": "iOS 14 en iPhone 8",
+            "severityPriority": "Alta / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=303"
+            }
+          },
+          {
+            "ID": "BUG-302",
+            "titulo": "Pérdida de datos al editar rutina",
+            "descripcion": "Al editar una rutina existente, se pierden los datos previos al guardar.",
+            "userStoryId": "US-302",
+            "testCaseId": "CP-302",
+            "steps": "1. Seleccionar rutina existente. 2. Modificar datos. 3. Guardar cambios.",
+            "resultadoEsperado": "Los datos se actualizan correctamente.",
+            "resultadoObtenido": "La configuración previa se pierde completamente.",
+            "environment": "Android 12, Samsung Galaxy S21",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=304"
+            }
+          },
+          {
+            "ID": "BUG-303",
+            "titulo": "Datos incompletos en gráficos",
+            "descripcion": "Los gráficos de progreso no muestran todos los datos históricos.",
+            "userStoryId": "US-303",
+            "testCaseId": "CP-303",
+            "steps": "1. Acceder a sección de progreso con datos de más de 3 meses.",
+            "resultadoEsperado": "Gráfico completo con todos los datos disponibles.",
+            "resultadoObtenido": "Sólo se muestran datos de los últimos 30 días.",
+            "environment": "iOS 15, iPhone 13",
+            "severityPriority": "Media / Media",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=305"
+            }
+          },
+          {
+            "ID": "BUG-304",
+            "titulo": "Limitación en API de progreso",
+            "descripcion": "El endpoint de progreso no incluye datos anteriores a 15 días.",
+            "userStoryId": "US-303",
+            "testCaseId": "API-302",
+            "steps": "1. Solicitar datos con period=30.",
+            "resultadoEsperado": "Datos de los últimos 30 días.",
+            "resultadoObtenido": "Sólo datos de los últimos 15 días.",
+            "environment": "Postman, macOS",
+            "severityPriority": "Media / Alta",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=306"
+            }
+          },
+          {
+            "ID": "BUG-305",
+            "titulo": "Inicio lento en dispositivos de gama baja",
+            "descripcion": "La aplicación tarda demasiado en iniciar en dispositivos menos potentes.",
+            "userStoryId": "US-301",
+            "testCaseId": "PR-301",
+            "steps": "1. Instalar app. 2. Abrir app.",
+            "resultadoEsperado": "Tiempo de inicio menor a 2 segundos.",
+            "resultadoObtenido": "Tiempo de inicio de 3.2 segundos.",
+            "environment": "Android 11, Xiaomi Redmi Note 8",
+            "severityPriority": "Media / Baja",
+            "evidencia": {
+              "imagen": "https://picsum.photos/640/480?random=307"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
