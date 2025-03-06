@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ProjectsContext } from '../context/ProjectsContext';
 import TestTables from '../components/TestTables';
+import UserStoryCard from '../components/UserStoryCard'; // Importar nuevo componente
 import '../styles/ProjectDetail.css';
 
 function ProjectDetail() {
   const { id } = useParams();
   const { projects } = useContext(ProjectsContext);
   const project = projects.find((p) => p.id.toString() === id);
+  const [activeStory, setActiveStory] = useState(null);
 
   if (!project) {
     return <div>Proyecto no encontrado.</div>;
@@ -32,15 +34,25 @@ function ProjectDetail() {
       {project.userStories && project.userStories.length > 0 && (
         <div className="user-stories-section">
           <h3>User Stories / Casos de Uso</h3>
-          <div className="user-stories-container">
+          <div 
+            className={`user-stories-container ${activeStory ? 'has-active-story' : ''}`}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%'
+            }}
+          >
             {project.userStories.map((story) => (
-              <div key={story.id} className="user-story-card" id={story.id}>
-                <div className="user-story-header">
-                  <span className="user-story-id">{story.id}</span>
-                  <h4 className="user-story-title">{story.titulo}</h4>
-                </div>
-                <p className="user-story-description">{story.descripcion}</p>
-              </div>
+              <UserStoryCard
+                key={story.id}
+                storyId={story.id}
+                story={story}
+                tests={project.tests}
+                isActive={activeStory === story.id}
+                onActivate={(storyId) => {
+                  setActiveStory(prevStoryId => prevStoryId === storyId ? null : storyId);
+                }}
+              />
             ))}
           </div>
         </div>

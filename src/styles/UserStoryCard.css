@@ -1,0 +1,452 @@
+/* src/styles/UserStoryCard.css */
+
+/* Contenedor principal de historias de usuario */
+.user-stories-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  /* Tarjeta de historia de usuario */
+  .user-story-card {
+    background-color: #f5f8ff;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .user-story-card:hover {
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+  }
+  
+  .user-story-card.expanded {
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+  }
+  
+  .user-story-card.active {
+    z-index: 10;
+  }
+  
+  /* Cabecera de la historia de usuario con contenido y botón */
+  .user-story-header {
+    padding: 1.25rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .user-story-header-content {
+    flex: 1;
+    padding-right: 30px; /* Espacio para el botón */
+  }
+  
+  /* Parte superior de la tarjeta con ID y título */
+  .user-story-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ID de la historia de usuario */
+  .user-story-id {
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-block;
+  }
+  
+  /* Separador entre ID y título */
+  .user-story-separator {
+    margin: 0 0.5rem;
+    font-weight: bold;
+    color: #4b5563;
+    display: inline-block;
+  }
+  
+  /* Título de la historia de usuario */
+  .user-story-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #293445;
+    margin: 0;
+    display: inline-block;
+  }
+  
+  /* Contenedor de descripción */
+  .user-story-desc-container {
+    margin-top: 0.5rem;
+    display: block;
+    width: 100%;
+  }
+  
+  /* Descripción de la historia de usuario */
+  .user-story-description {
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre-line; /* Respeta los saltos de línea */
+  }
+  
+  /* Botón de expansión */
+  .expand-button {
+    position: absolute;
+    right: 15px;
+    top: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b82f6;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+  
+  /* Contenido expandido de la historia de usuario */
+  .user-story-content {
+    padding: 1.25rem;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Grupos relacionados (casos de prueba, etc.) */
+  .related-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .related-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  .related-group-title {
+    font-size: 1rem;
+    color: #3b82f6;
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .related-group-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+  
+  /* Contenedor de items relacionados */
+  .related-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  /* Estilos para los items relacionados */
+  .related-item {
+    background-color: #f9fafb;
+    border-radius: 6px;
+    padding: 1rem;
+    border-left: 3px solid #9ca3af;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-left: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .related-item:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .related-item.pass {
+    border-left-color: #10b981;
+    background-color: #ecfdf5;
+  }
+  
+  .related-item.fail {
+    border-left-color: #ef4444;
+    background-color: #fef2f2;
+  }
+  
+  .related-item.warning {
+    border-left-color: #f59e0b;
+    background-color: #fffbeb;
+  }
+  
+  /* Estilo para bugs independientes */
+  .related-item.bug-item {
+    border-left-color: #ef4444;
+    background-color: #fef2f2;
+    margin-left: 1.5rem;
+  }
+  
+  /* Header del item relacionado */
+  .related-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+  }
+  
+  .related-item-header-content {
+    flex: 1;
+    padding-right: 30px; /* Espacio para el botón */
+  }
+  
+  .item-expand-button {
+    top: 0;
+  }
+  
+  /* ID del item relacionado */
+  .related-item-id {
+    font-size: 0.75rem;
+    background-color: #6b7280;
+    color: white;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  
+  .related-item.pass .related-item-id {
+    background-color: #10b981;
+  }
+  
+  .related-item.fail .related-item-id {
+    background-color: #ef4444;
+  }
+  
+  .related-item.warning .related-item-id {
+    background-color: #f59e0b;
+  }
+  
+  .related-item-id.bug-id {
+    background-color: #ef4444;
+  }
+  
+  /* Título del item relacionado */
+  .related-item-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1f2937;
+    display: inline-block;
+  }
+  
+  /* Estado del item */
+  .related-item-status {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-left: 0.5rem;
+  }
+  
+  .related-item-status.pass {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .related-item-status.fail {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .related-item-status.warning {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  /* Contenedor de descripción de item */
+  .related-item-desc-container {
+    margin-top: 0.5rem;
+    display: block;
+    width: 100%;
+  }
+  
+  .related-item-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .related-bug-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #b91c1c;
+    background-color: #fee2e2;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .related-bug-link:hover {
+    background-color: #fecaca;
+  }
+  
+  /* Estilos para bugs anidados */
+  .nested-bugs {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #e5e7eb;
+  }
+  
+  .nested-bugs-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #b91c1c;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nested-bugs-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .related-bug {
+    background-color: #fef2f2;
+    border-radius: 6px;
+    padding: 0.75rem;
+    border-left: 3px solid #ef4444;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    font-size: 0.85rem;
+    position: relative;
+  }
+  
+  .related-bug:last-child {
+    margin-bottom: 0;
+  }
+  
+  .related-bug::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    width: 1rem;
+    height: 1px;
+    background-color: #ef4444;
+  }
+  
+  .related-bug-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+  }
+  
+  .related-bug-id {
+    background-color: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .related-bug-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #991b1b;
+    flex: 1;
+  }
+  
+  /* Contenedor de descripción de bug */
+  .related-bug-desc-container {
+    margin-top: 0.25rem;
+    display: block;
+    width: 100%;
+  }
+  
+  .related-bug-desc {
+    font-size: 0.8rem;
+    color: #4b5563;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .related-bug-priority {
+    font-size: 0.7rem;
+    color: #991b1b;
+    background-color: #fee2e2;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.25rem;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .user-story-header,
+    .user-story-content {
+      padding: 1rem;
+    }
+    
+    .related-item {
+      padding: 0.75rem;
+    }
+    
+    .expand-button {
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .user-story-id {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+    }
+    
+    .user-story-title {
+      font-size: 1rem;
+    }
+    
+    .user-story-description {
+      font-size: 0.9rem;
+    }
+    
+    .expand-button {
+      right: 0.75rem;
+    }
+  }
