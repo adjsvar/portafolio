@@ -31,6 +31,9 @@ function TestTables({ tests, testType, layout, userStories }) {
     : tests[0].tipo
     ? tests[0].tipo.toUpperCase()
     : "TESTS";
+    
+  // Determina si es un bug report para cambiar estilos
+  const isBugReport = testType === "Reportes de Bug" || captionText === "REPORTES DE BUG";
 
   // --- Lógica para abrir/cerrar modal ---
   const handleOpenModal = (imgSrc) => {
@@ -126,7 +129,7 @@ function TestTables({ tests, testType, layout, userStories }) {
           </div>
         )}
 
-        <table className="test-table">
+        <table className={`test-table ${isBugReport ? "bug-report-table" : ""}`}>
           <thead>
             <tr className="table-caption-row">
               <th colSpan={orderedKeys.length} className="table-caption-cell">
@@ -184,14 +187,14 @@ function TestTables({ tests, testType, layout, userStories }) {
     ];
 
     return (
-      <div className="testtables-column-container">
+      <div className={`testtables-column-container ${isBugReport ? "bug-report-container" : ""}`}>
         {modalOpen && (
           <div className="evidence-modal" onClick={handleCloseModal}>
             <img src={modalImage} alt="Evidencia" />
           </div>
         )}
 
-        <div className={`testtables-column-nav ${singleItem ? "single-item" : ""}`}>
+        <div className={`testtables-column-nav ${singleItem ? "single-item" : ""} ${isBugReport ? "bug-report-nav" : ""}`}>
           <div className="nav-arrows-container">
             {!singleItem && (
               <>
@@ -210,10 +213,10 @@ function TestTables({ tests, testType, layout, userStories }) {
           </div>
         </div>
 
-        <div className="testtables-column-grid">
+        <div className={`testtables-column-grid ${isBugReport ? "bug-report-grid" : ""}`}>
           {orderedKeys.map((key) => (
             <div key={key} className="testtables-column-row">
-              <div className="grid-label">
+              <div className={`grid-label ${isBugReport ? "bug-grid-label" : ""}`}>
                 {key === "userStoryId" ? "User Story" : 
                  key === "reporteBugId" ? "Reporte de Bug" :
                  key === "testCaseId" ? "Caso de Prueba" : key}:

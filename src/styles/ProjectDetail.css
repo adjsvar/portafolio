@@ -117,12 +117,10 @@
   padding-top: 1.5rem;
 }
 
-/* Estilo especial para sección de reportes de bug */
+/* Estilo especial para sección de reportes de bug (modificado) */
 .bug-reports-section {
-  background-color: #fef2f2;
-  border-radius: 8px;
-  padding: 1.5rem;
-  border-left: 4px solid #ef4444;
+  /* Quitamos estilos especiales del contenedor para usar los nuevos en la tabla */
+  padding-top: 1.5rem;
 }
 
 .bug-reports-section h3 {

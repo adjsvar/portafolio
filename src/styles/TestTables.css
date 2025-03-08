@@ -31,18 +31,19 @@
   text-align: center;
 }
 
-/* Estilos exclusivos para tablas de reporte de bugs */
-#bug-reports .test-table th {
-  background-color: #fee2e2;
-  color: #b91c1c;
+/* Estilos para las tablas de bug reports */
+.bug-report-table th {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
 }
 
-#bug-reports .test-table td {
-  background-color: #fef2f2;
+.bug-report-table .table-caption-cell {
+  background-color: #ef4444 !important;
+  color: white !important;
 }
 
-#bug-reports .test-table .table-caption-cell {
-  background-color: #ef4444;
+.bug-report-table td {
+  background-color: #fef2f2 !important;
 }
 
 .test-table th, .test-table td {
@@ -89,6 +90,11 @@
   overflow: hidden;
 }
 
+/* Para el layout de columna de bug reports */
+.bug-report-container {
+  border: 1px solid #fecaca;
+}
+
 .testtables-column-nav {
   display: flex;
   flex-direction: column;
@@ -105,6 +111,10 @@
   align-items: center;
   width: 100%;
   background-color: #e2e8f0;
+}
+
+.bug-report-nav .nav-arrows-container {
+  background-color: #fee2e2 !important;
 }
 
 .single-item .nav-arrows-container {
@@ -125,6 +135,11 @@
   text-align: center;
 }
 
+.bug-report-nav .nav-title {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
 .nav-arrow {
   background-color: #3b82f6;
   border: none;
@@ -141,6 +156,14 @@
   justify-content: center;
   box-sizing: border-box;
   position: relative;
+}
+
+.bug-report-nav .nav-arrow {
+  background-color: #ef4444 !important;
+}
+
+.bug-report-nav .nav-arrow:hover {
+  background-color: #dc2626 !important;
 }
 
 /* Flechas */
@@ -191,6 +214,11 @@
   background-color: #e2e8f0;
   font-weight: bold;
   color: #3b82f6;
+}
+
+.bug-report-grid .bug-grid-label {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
 }
 
 .grid-value {
