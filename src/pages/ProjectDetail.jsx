@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ProjectsContext } from '../context/ProjectsContext';
 import TestTables from '../components/TestTables';
-import UserStoryCard from '../components/UserStoryCard'; // Importar nuevo componente
+import UserStoryCard from '../components/UserStoryCard';
 import '../styles/ProjectDetail.css';
 
 function ProjectDetail() {
@@ -10,6 +10,20 @@ function ProjectDetail() {
   const { projects } = useContext(ProjectsContext);
   const project = projects.find((p) => p.id.toString() === id);
   const [activeStory, setActiveStory] = useState(null);
+
+  // Escuchar evento de activación de user story desde TestTables
+  useEffect(() => {
+    const handleActivateUserStory = (event) => {
+      const { storyId } = event.detail;
+      setActiveStory(storyId);
+    };
+    
+    document.addEventListener('activate-userstory', handleActivateUserStory);
+    
+    return () => {
+      document.removeEventListener('activate-userstory', handleActivateUserStory);
+    };
+  }, []);
 
   if (!project) {
     return <div>Proyecto no encontrado.</div>;

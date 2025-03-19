@@ -356,3 +356,233 @@
     margin: 0.4rem;
   }
 }
+
+/* Estilos para filas con highlight */
+.highlighted-row {
+  transition: background-color 0.3s ease;
+}
+
+.test-table .highlighted-row > td {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.bug-report-table .highlighted-row > td {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Anclas para IDs de test */
+.test-id-anchor {
+  scroll-margin-top: 120px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Mejorar animación de resaltado para filas */
+@keyframes highlightRow {
+  0% { background-color: rgba(59, 130, 246, 0.3); }
+  40% { background-color: rgba(59, 130, 246, 0.2); } 
+  80% { background-color: rgba(59, 130, 246, 0.1); }
+  100% { background-color: rgba(59, 130, 246, 0.05); }
+}
+
+@keyframes highlightBugRow {
+  0% { background-color: rgba(239, 68, 68, 0.3); }
+  40% { background-color: rgba(239, 68, 68, 0.2); }
+  80% { background-color: rgba(239, 68, 68, 0.1); }
+  100% { background-color: rgba(239, 68, 68, 0.05); }
+}
+
+.test-table .highlighted-row {
+  animation: highlightRow 1.5s ease-out forwards;
+}
+
+.bug-report-table .highlighted-row {
+  animation: highlightBugRow 1.5s ease-out forwards;
+}
+
+/* Colores para filas según estado */
+.pass-row:hover td {
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+.fail-row:hover td {
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.warning-row:hover td {
+  background-color: rgba(245, 158, 11, 0.05);
+}
+
+/* Para vista de columna */
+.pass-container .nav-title {
+  position: relative;
+}
+
+.pass-container .nav-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #10b981;
+}
+
+.fail-container .nav-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #ef4444;
+}
+
+.warning-container .nav-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #f59e0b;
+}
+
+/* Mejorar anclas para mejor visualización */
+.test-id-anchor {
+  position: relative;
+  font-weight: 600;
+  color: #3b82f6;
+  display: inline-block;
+  padding: 2px 0;
+  scroll-margin-top: 120px;
+}
+
+.bug-report-table .test-id-anchor {
+  color: #dc2626;
+}
+
+.test-id-anchor::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.test-id-anchor:hover::after {
+  width: 100%;
+}
+
+/* Mejorar contraste en estilos de estado */
+.pass {
+  background-color: #dcfce7 !important;
+  color: #166534 !important;
+  font-weight: 600;
+}
+
+.fail {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  font-weight: 600;
+}
+
+.warning {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  font-weight: 600;
+}
+
+/* Mejorar links de user story para navegación */
+.user-story-link {
+  background-color: #dbeafe;
+  color: #1e40af;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.user-story-link:hover {
+  background-color: #bfdbfe;
+  transform: translateY(-1px);
+}
+
+.bug-report-link {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.bug-report-link:hover {
+  background-color: #fecaca;
+  transform: translateY(-1px);
+}
+
+/* Resaltado mejorado para filas */
+.super-highlight {
+  position: relative;
+  z-index: 10;
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: -2px;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5) !important;
+}
+
+.bug-report-table .super-highlight {
+  outline: 2px solid #ef4444 !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* Animación pulsante para destacar elementos */
+@keyframes superHighlightPulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.8); }
+  50% { box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+@keyframes superHighlightBugPulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); }
+  50% { box-shadow: 0 0 10px 4px rgba(239, 68, 68, 0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.super-highlight.highlighted-row {
+  animation: superHighlightPulse 1.5s ease-out 3;
+}
+
+.bug-report-table .super-highlight.highlighted-row {
+  animation: superHighlightBugPulse 1.5s ease-out 3;
+}
+
+/* Mejorar la visibilidad de IDs cuando se resaltan */
+.highlighted-row td:first-child {
+  font-weight: bold;
+}
+
+/* Efecto de focus para filas */
+tr:focus {
+  outline: none;
+}
+
+tr:focus.highlighted-row {
+  outline: 2px dashed #3b82f6;
+  outline-offset: -2px;
+}
+
+.bug-report-table tr:focus.highlighted-row {
+  outline: 2px dashed #ef4444;
+  outline-offset: -2px;
+}
+
+/* Estilos para contenedor activo */
+.active-container {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
