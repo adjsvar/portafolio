@@ -21,6 +21,7 @@ function Home() {
               analítico y atención al detalle. Busco mi primera oportunidad en QA
               para aplicar mis conocimientos, aprender y aportar valor al equipo.
             </p>
+            <p>(aviso este es un WIP quizas sea mi ultimo proyecto QA para el mismo portafolio, hay muchas cosas que corregir)</p>
           </div>
         </div>
       </section>
