@@ -1,29 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ProjectsContext } from '../context/ProjectsContext';
 import TestTables from '../components/TestTables';
-import UserStoryCard from '../components/UserStoryCard';
 import '../styles/ProjectDetail.css';
 
 function ProjectDetail() {
   const { id } = useParams();
   const { projects } = useContext(ProjectsContext);
   const project = projects.find((p) => p.id.toString() === id);
-  const [activeStory, setActiveStory] = useState(null);
-
-  // Escuchar evento de activación de user story desde TestTables
-  useEffect(() => {
-    const handleActivateUserStory = (event) => {
-      const { storyId } = event.detail;
-      setActiveStory(storyId);
-    };
-    
-    document.addEventListener('activate-userstory', handleActivateUserStory);
-    
-    return () => {
-      document.removeEventListener('activate-userstory', handleActivateUserStory);
-    };
-  }, []);
 
   if (!project) {
     return <div>Proyecto no encontrado.</div>;
@@ -43,34 +27,6 @@ function ProjectDetail() {
           {project.descripcion && <p>{project.descripcion}</p>}
         </div>
       </div>
-
-      {/* Sección de User Stories */}
-      {project.userStories && project.userStories.length > 0 && (
-        <div className="user-stories-section">
-          <h3>User Stories / Casos de Uso</h3>
-          <div 
-            className={`user-stories-container ${activeStory ? 'has-active-story' : ''}`}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%'
-            }}
-          >
-            {project.userStories.map((story) => (
-              <UserStoryCard
-                key={story.id}
-                storyId={story.id}
-                story={story}
-                tests={project.tests}
-                isActive={activeStory === story.id}
-                onActivate={(storyId) => {
-                  setActiveStory(prevStoryId => prevStoryId === storyId ? null : storyId);
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Sección de Tests */}
       {project.tests && project.tests.length > 0 ? (
@@ -96,7 +52,6 @@ function ProjectDetail() {
                 <TestTables 
                   tests={test.items} 
                   testType={test.tipo} 
-                  userStories={project.userStories} 
                 />
               </div>
             </div>

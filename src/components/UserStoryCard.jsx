@@ -61,163 +61,6 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
   const relatedTests = getRelatedTests();
   const hasRelatedTests = relatedTests.length > 0;
   
-  // Función mejorada de scroll para alinear el borde superior con mayor margen
-  // y resaltar mejor el elemento seleccionado
-  const scrollToElement = (elementId) => {
-    // Esperar un poco para asegurar que el DOM esté actualizado
-    setTimeout(() => {
-      // Buscar el elemento por su ID con y sin #
-      let element = document.getElementById(elementId);
-      if (!element) {
-        element = document.getElementById(elementId.replace('#', ''));
-      }
-      
-      if (element) {
-        // Intentar abrir la pestaña correspondiente si está en otra sección
-        // Buscar una fila de tabla que contiene el elementId
-        const rows = document.querySelectorAll('tr');
-        let targetRow = null;
-        
-        rows.forEach(row => {
-          if (row.textContent.includes(elementId)) {
-            targetRow = row;
-          }
-        });
-        
-        if (targetRow) {
-          // Obtener coordenadas del elemento
-          const rect = targetRow.getBoundingClientRect();
-          
-          // Calcular posición para alinear borde superior con margen
-          const topMargin = 120;
-          const scrollPosition = window.pageYOffset + rect.top - topMargin;
-          
-          // Realizar scroll
-          window.scrollTo({
-            top: scrollPosition,
-            behavior: 'smooth'
-          });
-          
-          // Destacar visualmente el elemento
-          targetRow.classList.add('highlighted-row');
-          targetRow.classList.add('super-highlight'); // Clase adicional para mayor resaltado
-          
-          // Añadir atributo tabindex para recibir focus
-          targetRow.setAttribute('tabindex', '-1');
-          targetRow.focus();
-          
-          // Eliminar la clase highlight después de un tiempo
-          setTimeout(() => {
-            targetRow.classList.remove('highlighted-row');
-            targetRow.classList.remove('super-highlight');
-          }, 3000); // Aumentamos a 3 segundos para mejor visibilidad
-          
-          return; // Salir de la función si encontramos la fila
-        }
-        
-        // Si no encontramos una fila, intentar con el elemento original
-        // Obtener coordenadas del elemento
-        const rect = element.getBoundingClientRect();
-        
-        // Calcular posición para alinear borde superior con margen
-        const topMargin = 120;
-        const scrollPosition = window.pageYOffset + rect.top - topMargin;
-        
-        // Realizar scroll
-        window.scrollTo({
-          top: scrollPosition,
-          behavior: 'smooth'
-        });
-        
-        // Destacar visualmente el elemento
-        element.classList.add('highlight-test');
-        element.classList.add('super-highlight'); // Clase adicional para mayor resaltado
-        
-        // Añadir atributo tabindex para recibir focus
-        element.setAttribute('tabindex', '-1');
-        element.focus();
-        
-        // Buscar la fila que contiene el elemento para resaltarla también
-        const containingRow = element.closest('tr');
-        if (containingRow) {
-          containingRow.classList.add('highlighted-row');
-          containingRow.classList.add('super-highlight');
-          
-          // Eliminar la clase highlight después de un tiempo
-          setTimeout(() => {
-            containingRow.classList.remove('highlighted-row');
-            containingRow.classList.remove('super-highlight');
-            element.classList.remove('highlight-test');
-            element.classList.remove('super-highlight');
-          }, 3000);
-        } else {
-          setTimeout(() => {
-            element.classList.remove('highlight-test');
-            element.classList.remove('super-highlight');
-          }, 3000);
-        }
-      } else {
-        console.warn(`Elemento con ID ${elementId} no encontrado, buscando en el DOM...`);
-        
-        // Buscar el texto del ID en el contenido de la página
-        const elements = document.querySelectorAll('td');
-        elements.forEach(el => {
-          if (el.textContent.includes(elementId)) {
-            const row = el.closest('tr');
-            if (row) {
-              // Destacar la fila encontrada
-              row.classList.add('highlighted-row');
-              row.classList.add('super-highlight');
-              
-              // Scroll a la fila
-              const rect = row.getBoundingClientRect();
-              const topMargin = 120;
-              const scrollPosition = window.pageYOffset + rect.top - topMargin;
-              
-              window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
-              });
-              
-              // Añadir atributo tabindex para recibir focus
-              row.setAttribute('tabindex', '-1');
-              row.focus();
-              
-              // Eliminar después de un tiempo
-              setTimeout(() => {
-                row.classList.remove('highlighted-row');
-                row.classList.remove('super-highlight');
-              }, 3000);
-              
-              console.log(`Encontrado texto ${elementId} en elemento:`, row);
-            }
-          }
-        });
-      }
-    }, 100);
-  };
-  
-  // Realizar scroll cuando la tarjeta se expande
-  useEffect(() => {
-    if (isExpanded && cardRef.current) {
-      // Calcular posición para la tarjeta
-      const rect = cardRef.current.getBoundingClientRect();
-      const topMargin = 120;
-      const scrollPosition = window.pageYOffset + rect.top - topMargin;
-      
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: 'smooth'
-      });
-      
-      // Destacar la tarjeta
-      cardRef.current.classList.add('highlight-card');
-      setTimeout(() => {
-        cardRef.current.classList.remove('highlight-card');
-      }, 1500);
-    }
-  }, [isExpanded]);
-  
   // Expandir por defecto si se activa
   useEffect(() => {
     if (isActive && hasRelatedTests && !isExpanded) {
@@ -232,7 +75,7 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
     }
   }, [hasRelatedTests]);
   
-  // Manejar clic en la tarjeta principal - ahora abre/cierra
+  // Manejar clic en la tarjeta principal
   const handleCardClick = (e) => {
     // Solo procesar si no se hizo clic en un elemento anidado
     if (e.target.closest('.related-bug-link') || e.target.closest('.related-item') || e.target.closest('.related-bug')) {
@@ -241,30 +84,22 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
     
     // Expandir/colapsar la tarjeta si tiene tests relacionados
     if (hasRelatedTests) {
-      // Alternar entre expandido/colapsado
       setIsExpanded(!isExpanded);
       
       if (!isActive) {
         onActivate(storyId);
       } else if (isExpanded) {
-        // Si ya está activa y expandida, al hacer clic se desactiva
         onActivate(null);
       }
-      
-      // Navegar a la historia de usuario
-      scrollToElement(story.id);
     }
   };
   
-  // Manejar navegación a un test específico
+  // Método para navegar a test específico - simplificado
   const navigateToTest = (e, testId) => {
-    e.stopPropagation();
-    // Navegar directo al ID
-    scrollToElement(testId);
-    // Guardar como item activo
+    if (e) e.stopPropagation();
     setActiveItemId(testId);
     
-    // Disparar un evento para que otros componentes sepan que se ha activado un item
+    // Emitir evento para que TestTables lo maneje
     const event = new CustomEvent('activateItem', { 
       detail: { itemId: testId } 
     });
@@ -274,6 +109,7 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
   // Manejar clic en un item de prueba
   const handleItemClick = (e, item) => {
     e.stopPropagation();
+    // Solo navega al caso de prueba, no a su bug relacionado
     navigateToTest(e, item.ID);
   };
 
@@ -296,11 +132,6 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
             <p className="user-story-description">{story.descripcion}</p>
           </div>
         </div>
-        {isExpanded && (
-          <div className="card-indicator">
-            <span className="card-indicator-text">Clic para cerrar</span>
-          </div>
-        )}
       </div>
       
       {isExpanded && (
@@ -338,6 +169,7 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
                         <p className="related-item-desc">{item.descripcion}</p>
                       </div>
                       
+                      {/* Botón de bug como un elemento separado */}
                       {item.reporteBugId && (
                         <button 
                           className="related-bug-link"
@@ -350,7 +182,7 @@ const UserStoryCard = ({ story, tests = [], isActive, onActivate, storyId }) => 
                         </button>
                       )}
                       
-                      {/* Mostrar bugs relacionados directamente */}
+                      {/* Bugs relacionados */}
                       {item.relatedBugs && item.relatedBugs.length > 0 && (
                         <div className="nested-bugs">
                           <h6 className="nested-bugs-title">

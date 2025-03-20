@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TestTables.css";
 
-function TestTables({ tests, testType, layout, userStories }) {
+function TestTables({ tests, testType, layout }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,7 +19,7 @@ function TestTables({ tests, testType, layout, userStories }) {
       highlightElementFromHash();
     };
     
-    // Escuchar activaciones de items desde UserStoryCard
+    // Escuchar activaciones de items
     const handleActivateItem = (event) => {
       const { itemId } = event.detail;
       setActiveItemId(itemId);
@@ -165,38 +165,6 @@ function TestTables({ tests, testType, layout, userStories }) {
     setModalImage("");
   };
 
-  // Función para encontrar la user story por ID - simplificada
-  const getUserStoryById = (id) => {
-    if (!userStories || !id) return null;
-    return userStories.find(story => story.id === id);
-  };
-  
-  // Función para navegar a user story
-  const navigateToUserStory = (e, storyId) => {
-    e.preventDefault();
-    
-    // Buscar el elemento por su ID
-    const element = document.getElementById(storyId);
-    if (element) {
-      // Destacar el elemento
-      element.classList.add('highlight-card');
-      
-      // Hacer scroll al elemento
-      scrollToElement(element);
-      
-      // Remover highlight después de un tiempo
-      setTimeout(() => {
-        element.classList.remove('highlight-card');
-      }, 3000);
-      
-      // Activar la tarjeta (expandirla)
-      const event = new CustomEvent('activate-userstory', { 
-        detail: { storyId: storyId } 
-      });
-      document.dispatchEvent(event);
-    }
-  };
-
   // Render de celdas - simplificado
   const renderCell = (value, key, item) => {
     if (key === "evidencia" && value && typeof value === "object" && value.imagen) {
@@ -208,23 +176,6 @@ function TestTables({ tests, testType, layout, userStories }) {
           Ver Evidencia
         </span>
       );
-    }
-    
-    // Renderiza user story como un enlace con navegación mejorada
-    if (key === "userStoryId" && value) {
-      const userStory = getUserStoryById(value);
-      if (userStory) {
-        return (
-          <a 
-            href={`#${value}`} 
-            className="user-story-link"
-            onClick={(e) => navigateToUserStory(e, value)}
-          >
-            {value}: {userStory.titulo}
-          </a>
-        );
-      }
-      return value;
     }
     
     // Renderiza reporte de bug como un enlace
@@ -266,7 +217,7 @@ function TestTables({ tests, testType, layout, userStories }) {
   // ==================== LAYOUT ROW ====================
   if (computedLayout === "row") {
     // Ordenamos las keys de forma simplificada
-    const priorityKeys = ["ID", "userStoryId", "titulo", "descripcion"];
+    const priorityKeys = ["ID", "titulo", "descripcion"];
     const endKeys = ["reporteBugId", "testCaseId"];
     const middleKeys = allKeys.filter(key => !priorityKeys.includes(key) && !endKeys.includes(key));
     
@@ -295,8 +246,7 @@ function TestTables({ tests, testType, layout, userStories }) {
             <tr>
               {orderedKeys.map((key) => (
                 <th key={key}>
-                  {key === "userStoryId" ? "User Story" : 
-                   key === "reporteBugId" ? "Reporte de Bug" :
+                  {key === "reporteBugId" ? "Reporte de Bug" :
                    key === "testCaseId" ? "Caso de Prueba" : key}
                 </th>
               ))}
@@ -343,7 +293,7 @@ function TestTables({ tests, testType, layout, userStories }) {
     };
 
     // Ordenamos las keys de forma simplificada
-    const priorityKeys = ["ID", "userStoryId", "titulo", "descripcion"];
+    const priorityKeys = ["ID", "titulo", "descripcion"];
     const endKeys = ["reporteBugId", "testCaseId"];
     const middleKeys = allKeys.filter(key => !priorityKeys.includes(key) && !endKeys.includes(key));
     
@@ -393,8 +343,7 @@ function TestTables({ tests, testType, layout, userStories }) {
           {orderedKeys.map((key) => (
             <div key={key} className="testtables-column-row">
               <div className={`grid-label ${isBugReport ? "bug-grid-label" : ""}`}>
-                {key === "userStoryId" ? "User Story" : 
-                 key === "reporteBugId" ? "Reporte de Bug" :
+                {key === "reporteBugId" ? "Reporte de Bug" :
                  key === "testCaseId" ? "Caso de Prueba" : key}:
               </div>
               <div className={`grid-value ${getCellClass(currentItem[key], key)}`}>

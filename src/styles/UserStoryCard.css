@@ -8,7 +8,7 @@
   gap: 0.5rem;
 }
 
-/* Tarjeta de historia de usuario - nuevo estilo más plano y limpio */
+/* Tarjeta de historia de usuario - estilo plano y limpio */
 .user-story-card {
   background-color: #fafbfc;
   border-radius: 6px;
@@ -36,7 +36,7 @@
   border-left-width: 4px;
 }
 
-/* Cabecera de la historia de usuario con contenido y botón */
+/* Cabecera de la historia de usuario con contenido */
 .user-story-header {
   padding: 0.75rem 1rem;
   position: relative;
@@ -51,7 +51,6 @@
 
 .user-story-header-content {
   flex: 1;
-  padding-right: 30px; /* Espacio para el botón */
 }
 
 /* Parte superior de la tarjeta con ID y título */
@@ -137,15 +136,7 @@
 }
 
 .related-group-title::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 16px;
-  background-color: #3b82f6;
-  border-radius: 3px;
+  display: none;
 }
 
 /* Contenedor de items relacionados */
@@ -156,7 +147,7 @@
   width: 100%;
 }
 
-/* Estilos para los items relacionados - nuevo estilo más plano */
+/* Estilos para los items relacionados */
 .related-item {
   background-color: #f8fafc;
   border-radius: 4px;
@@ -306,7 +297,7 @@
 .nested-bugs {
   margin-top: 0.75rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .nested-bugs-title {
@@ -436,23 +427,6 @@
   }
 }
 
-/* Indicador de tarjeta expandida */
-.card-indicator {
-  position: absolute;
-  right: 12px;
-  top: 12px;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  background-color: rgba(59, 130, 246, 0.1);
-  border-radius: 4px;
-  color: #3b82f6;
-  transition: all 0.2s ease;
-}
-
-.user-story-card:hover .card-indicator {
-  background-color: rgba(59, 130, 246, 0.2);
-}
-
 /* Estilos de resaltado para tarjetas y elementos */
 .highlight-card {
   box-shadow: 0 0 0 2px #3b82f6, 0 4px 12px rgba(59, 130, 246, 0.2) !important;
@@ -471,18 +445,45 @@
   z-index: 2;
 }
 
-/* Mejorar la animación de resaltado */
-@keyframes highlightTest {
-  0% { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.7); }
-  40% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4); }
-  80% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1); }
-  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+/* Estilos de resaltado tipo destello */
+.subtle-highlight {
+  animation: flashHighlight 0.8s ease-out forwards;
+  border: none !important;
+  outline: none !important;
 }
 
-.highlight-test {
-  animation: highlightTest 1.5s ease-out;
-  position: relative;
-  z-index: 5;
+@keyframes flashHighlight {
+  0% { 
+    box-shadow: none;
+    background-color: transparent;
+  }
+  20% { 
+    box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.6);
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  100% { 
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.bug-report-table .subtle-highlight {
+  animation: flashHighlightBug 0.8s ease-out forwards;
+}
+
+@keyframes flashHighlightBug {
+  0% { 
+    box-shadow: none;
+    background-color: transparent;
+  }
+  20% { 
+    box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.6);
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+  100% { 
+    box-shadow: none;
+    background-color: transparent;
+  }
 }
 
 /* Mejorar indicadores visuales para items clickeables */
@@ -515,7 +516,7 @@
   transform: rotate(-45deg) scale(1.2);
 }
 
-/* Estilos para bugs con mejor contraste */
+/* Estilos para bugs */
 .related-bug {
   position: relative;
   cursor: pointer;
@@ -541,6 +542,43 @@
   transition: all 0.2s ease;
 }
 
-.related-bug:hover::after {
-  opacity: 1;
+/* Estilos para el carrusel de historias de usuario en móvil */
+.user-story-carousel {
+  width: 100%;
+  position: relative;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background-color: #f0f7ff;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.carousel-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.carousel-button:hover {
+  background-color: #2563eb;
+}
+
+.carousel-indicator {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #3b82f6;
 }
